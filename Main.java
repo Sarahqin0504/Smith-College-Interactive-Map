@@ -12,7 +12,7 @@ public class Main {
         
         // Welcome message
         System.out.println("Welcome to the Library!");
-        System.out.println("You are currently in: " + player.getCurrentRoom().getName());
+        System.out.println("You are currently in: " + player.getCurrentRoom());
 
         // Game loop
         while (true) {
