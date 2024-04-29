@@ -9,9 +9,8 @@ public class Player extends Thing implements Contract{
     private int flowerSize = 1;
     private String season = "";
 
-    public Player (String name, String description, Room startingRoom) {
+    public Player (String name, String description) {
         super(name, description);
-        this.currentRoom = startingRoom;
         this.inventory = new ArrayList<>();
     }
 

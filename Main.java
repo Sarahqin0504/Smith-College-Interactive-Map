@@ -8,7 +8,7 @@ public class Main {
         Library library = new Library();
         
         // Create a player and place them in the starting room (e.g., the first floor)
-        Player player = new Player("Player", "You are the player.", library.getElevatorFloor());
+        Player player = new Player("Player", "You are the player.");
         
         // Welcome message
         System.out.println("Welcome to the Library!");
@@ -46,7 +46,7 @@ public class Main {
                     String direction = scanner.nextLine().trim().toLowerCase();
                     boolean moved = player.walk(direction);
                     if (moved) {
-                        System.out.println("You moved to: " + player.getCurrentRoom().getName());
+                        System.out.println("You moved to: " + player.getCurrentRoom());
                     }
                     break;
                 case "quit":
