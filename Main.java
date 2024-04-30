@@ -6,13 +6,16 @@ public class Main {
         
         // Create a library map
         Library library = new Library();
+        BotanicGarden botanicGarden = new BotanicGarden();
+   
         
         // Create a player and place them in the starting room (e.g., the first floor)
-        Player player = new Player("Player", "You are the player.");
+        Player player = new Player("Player", "You are the player.", new FirstFloor());
         
         // Welcome message
-        System.out.println("Welcome to the Library!");
-        System.out.println("You are currently in: " + player.getCurrentRoom());
+        System.out.println("Welcome to Smith College!");
+        System.out.println("You are currently at: " + player.getCurrentPlace().getName());
+        
 
         // Game loop
         while (true) {
@@ -42,12 +45,9 @@ public class Main {
                     player.use(itemToUse);
                     break;
                 case "walk":
-                    System.out.print("Enter direction to walk (north/south/east/west): ");
+                    System.out.print("Enter direction to walk (north/south/east/west) (elevator available in Library): ");
                     String direction = scanner.nextLine().trim().toLowerCase();
-                    boolean moved = player.walk(direction);
-                    if (moved) {
-                        System.out.println("You moved to: " + player.getCurrentRoom());
-                    }
+                    player.walk(direction);
                     break;
                 case "quit":
                     System.out.println("Goodbye!");
@@ -57,6 +57,8 @@ public class Main {
                     System.out.println("Invalid action. Please try again.");
                     break;
             }
+            
         }
+
     }
 }

@@ -2,24 +2,27 @@ import java.util.*;
 
 public class Player extends Thing implements Contract{
 
-    private Room currentRoom; // The current room the player is in
+    private Place currentPlace; // The current room the player is in
     private List<String> inventory; // The player's inventory
     private boolean isResting = false;
     private String lastAction = "";
     private int flowerSize = 1;
     private String season = "";
+    Scanner scanner = new Scanner(System.in);
 
-    public Player (String name, String description) {
+    public Player (String name, String description, Place currentPlace) {
         super(name, description);
         this.inventory = new ArrayList<>();
+        // Set the default location to the first floor
+        this.currentPlace = currentPlace;
     }
 
-    public void setCurrentRoom(Room room) {
-        this.currentRoom = room;
+    public Place getCurrentPlace() {
+        return currentPlace;
     }
 
-    public Room getCurrentRoom() {
-        return currentRoom;
+    public void setCurrentPlace (Place currentPlace) {
+        this.currentPlace = currentPlace;
     }
 
     /**
@@ -42,6 +45,14 @@ public class Player extends Thing implements Contract{
     }
 
     public void examine(String itemName) {
+        // Check if the item exists in the current room's inventory
+        for (Thing item : currentPlace.getList()) {
+            if (item.getName().equals(itemName)) {
+                // If the item exists, print its description
+                System.out.println("You examined " + itemName + ": " + item.getDescription());
+                return; // Exit the method after printing the description
+            }
+        }
         switch (itemName.toLowerCase()) {
             case "butterfly":
                 System.out.println("You see a butterfly. Its wings feature bright blue with black markings.");
@@ -68,58 +79,81 @@ public class Player extends Thing implements Contract{
                 System.out.println("Birds are singing delightly.");
                 break;
             default:
-                System.out.println("The"+ itemName + "can not be found in the botanic garden.");
+                System.out.println("The "+ itemName + " can not be found.");
                 break;
         }
-        // Check if the item exists in the current room's inventory
-        for (Thing item : currentRoom.getList()) {
-            if (item.getName().equals(itemName)) {
-                // If the item exists, print its description
-                System.out.println("You examined " + itemName + ": " + item.getDescription());
-                return; // Exit the method after printing the description
-            }
-        }
-        // If the loop completes without finding the item, inform the player
-        System.out.println("There is no " + itemName + " to examine in this room.");
     }
 
     public void use(String item) {
         if(item.equalsIgnoreCase("map")) {
-            System.out.println("You use the map to find your way to the botanic garden.");
+            System.out.println("You use the map to find your way.");
         } else {
         System.out.println("You used " + item + ".");
         }
     }
 
     public boolean walk(String direction) {
-        Room nextRoom = null;
+        Place nextPlace = null;
         switch (direction.toLowerCase()) {
             case "north":
-                nextRoom = currentRoom.getExit("north");
+                nextPlace = currentPlace.getExit("north");
                 break;
             case "south":
-                nextRoom = currentRoom.getExit("south");
+                nextPlace = currentPlace.getExit("south");
                 break;
             case "east":
-                nextRoom = currentRoom.getExit("east");
+                nextPlace = currentPlace.getExit("east");
                 break;
             case "west":
-                nextRoom = currentRoom.getExit("west");
+                nextPlace = currentPlace.getExit("west");
                 break;
+            case "elevator":
+                // If the player wants to use the elevator, prompt them to enter a floor number
+                System.out.println("Enter floor number for the elevator:");
+                int floorNumber = scanner.nextInt(); // Assuming you have a scanner object
+
+                // Use switch statement to handle different floor numbers
+                switch (floorNumber) {
+                    case 0:
+                        currentPlace = new GroundFloor();
+                        System.out.println("You are now at the Ground Floor.");
+                        break;
+                    case 1:
+                        currentPlace = new FirstFloor();
+                        System.out.println("You are now at the First Floor.");
+                        break;
+                    case 2:
+                        currentPlace = new SecondFloor();
+                        System.out.println("You are now at the Second Floor.");
+                        break;
+                    case 3:
+                        currentPlace = new ThirdFloor();
+                        System.out.println("You are now at the Third Floor.");
+                        break;
+                    case 4:
+                        currentPlace = new FourthFloor();
+                        System.out.println("You are now at the Fourth Floor.");
+                    default:
+                        // If the input doesn't match any floor number, inform the player
+                        System.out.println("Invalid floor number.");
+                        break;
+                }
+                return true; // Return true since the player successfully used the elevator
             default:
-                System.out.println("Invalid direction. Please enter north, south, east, or west.");
+                System.out.println("Invalid direction. Please enter north, south, east, west, or elevator.");
                 return false;
         }
-        if (nextRoom != null) {
-            // If there is an exit in the specified direction, move to the next room
-            currentRoom = nextRoom;
+        if (nextPlace != null) {
+            // If there is an exit in the specified direction, move to the next place
+            currentPlace = nextPlace;
+            System.out.println("You moved to: " + currentPlace.getName());
             return true;
         } else {
             // If there is no exit in the specified direction, inform the player
             System.out.println("There is no exit in that direction.");
             return false;
         }
-    }
+    }  
 
     /**
      * Changes the season in the garden.

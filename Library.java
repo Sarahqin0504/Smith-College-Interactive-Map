@@ -4,7 +4,6 @@ import java.util.Map;
 public class Library extends Place {
 
     private Map<String, Place> floors; 
-    private Elevator elevator; 
 
     public Library() {
         super("Library", "Main library building");
@@ -23,18 +22,15 @@ public class Library extends Place {
         floors.put("Chapin Lawn", new ChapinLawn());
         floors.put("Burton Lawn", new BurtonLawn());
         floors.put("Seelye Lawn", new SeelyeLawn());
-        floors.put("Alumni Gym", new alumniGym());
-
-        // Initialize the elevator with the maximum number of floors
-        elevator = new Elevator("Elevator", "Main library elevator", floors.size());
+        floors.put("Alumni Gym", new AlumniGym());
 
         // Set exits for each floor
         GroundFloor groundFloor = (GroundFloor) floors.get("Ground Floor");
-        groundFloor.setExit("south", floors.get("Alumni Gym"));
+        groundFloor.setExit("south", new AlumniGym());
         groundFloor.setExit("west", floors.get("Burton Lawn"));
 
         FirstFloor firstFloor = (FirstFloor) floors.get("First Floor");
-        firstFloor.setExit("north", floors.get("Compass Cafe"));
+        firstFloor.setExit("north", new CompassCafe());
         firstFloor.setExit("east", floors.get("Seelye Lawn"));
 
         CompassCafe compassCafe = (CompassCafe) floors.get("Compass Cafe");
@@ -54,14 +50,17 @@ public class Library extends Place {
 
         ChapinLawn chapinLawn = (ChapinLawn) floors.get("Chapin Lawn");
         chapinLawn.setExit("south", floors.get("Compass Cafe"));
+        chapinLawn.setExit("south", new BotanicGarden());
+
+        AlumniGym alumniGym = (AlumniGym) floors.get("Alumni Gym");
+        alumniGym.setExit("south", new Bookstore(getName(), getDescription(), true));
+
     }
 
-    // Method to move the elevator to a specific floor
-    public void goToElevatorFloor(int floor) {
-        elevator.goToFloor(floor);
+    public Map<String, Place> getFloors() {
+        return floors;
     }
 }
-
 
 class GroundFloor extends Place {
     public GroundFloor() {
@@ -70,6 +69,7 @@ class GroundFloor extends Place {
         addItem(new Thing("Book", "Interactive Linear Algebra"));
         addItem(new Thing("Front Desk", "You can borrow and return books"));
         addItem(new Thing("Faculty One card", "You can access different exits"));
+    
     }
 }
 
@@ -142,10 +142,8 @@ class SeelyeLawn extends Place {
     }
 }
 
-class alumniGym extends Place {
-    public alumniGym() {
+class AlumniGym extends Place {
+    public AlumniGym() {
         super("Alumni Gym", "This is the Alumni Gym, where you actually study");
     }
 }
-
-

@@ -1,18 +1,14 @@
-import java.util.Random;
 import java.util.HashMap;
 import java.util.Map;
 
-public class BotanicGarden implements Contract {
-    private boolean isResting = false;
-    private String lastAction = "";
-    private int flowerSize = 1;
-    private String season = "";
-    private Map<String, Room> rooms;
+public class BotanicGarden extends Place{
+    private Map<String, Place> rooms;
     
     /**
      * Constructor for the BotanicGarden class.
      */
     public BotanicGarden() {
+        super("Botanic Garden", "This is the Botanic Garden");
         initializeRooms();
         System.out.println("Welcome to the Botanic Garden of Smith College!");
         System.out.println("Explore our Lyman Plant House featuring various unique botanical rooms.");
@@ -33,230 +29,84 @@ public class BotanicGarden implements Contract {
         rooms.put("Genetics House", new GeneticsHouse());
     }
 
-    public void visitRoom(String roomName) {
-        if (rooms.containsKey(roomName)) {
-            rooms.get(roomName).enter();
-        } else {
-            System.out.println("No such room found in the Lyman Plant House.");
+    public class ChurchGallery extends Place {
+        public ChurchGallery() {
+            super("Church Gallery", "The Church Gallery is located in the front of the building downstairs from the reception area. It serves as a space for education, featuring changing exhibitions on a variety of botanical and horticultural themes.");
+            // Additional initialization code if needed
         }
     }
     
-    /**
-     * The method is for visitors to walk in a given direction in the garden.
-     * @param direction The direction in which to walk.
-     * @return true if the direction is valid, false otherwise.
-     */
-    @Override
-    public boolean walk(String direction) {
-        System.out.println("You walk " + direction + " through the garden.");
-        return true; // In a real implementation, you might check if the direction is valid
-    }
-
-
-    /**
-     * The method is for the visitor to pick up an item in the garden.
-     * @param item The item to pick up.
-     */
-    @Override
-    public void grab(String item) {
-        System.out.println("You have picked up " + item + ".");
-    }
-
-    /**
-     * The method is for the visitor to drop an item in the garden.
-     * @param item The item to drop.
-     * @return A message indicating the item has been dropped.
-     */
-    @Override
-    public String drop(String item) {
-        return "You have dropped " + item + ".";
-    }
-
-    /**
-     * Changes the season in the garden.
-     * Simulates the effect of seasons changing on the garden's flora and fauna.
-     */
-    public void changeSeason() {
-        String[] seasons = {"spring", "summer", "autumn", "winter"};
-        Random rand = new Random();
-        this.season = seasons[rand.nextInt(seasons.length)];
-        System.out.println("The season has changed to " + this.season + ".");
-        switch (this.season) {
-            case "spring":
-                System.out.println("Flowers start blooming beautifully.");
-                break;
-            case "summer":
-                System.out.println("The garden is having a hot party now!");
-                break;
-            case "autumn":
-                System.out.println("The garden starts to calm down.");
-                break;
-            case "winter":
-                System.out.println("The garden rests under a blanket of snow.");
-                break;
-        }
-        lastAction = "changeSeason";
-    }
-
-    /**
-     * The method is for visitors to examine an item or place in the garden.
-     */
-    @Override
-    public void examine(String item) {
-        switch (item.toLowerCase()) {
-            case "butterfly":
-                System.out.println("You see a butterfly. Its wings feature bright blue with black markings.");
-                break;
-            case "flower":
-                if (season.equalsIgnoreCase("spring")) {
-                    System.out.println("You examine a sakura. It seems to be a cherry-blossom season.");
-                } 
-                else if (season.equalsIgnoreCase("summer")) {
-                    System.out.println("You're looking at a pink lotus. It lies on the lily pads.");
-                }
-                break;
-            case "pond":
-                System.out.println("The pond is peaceful, with lily pads scattered across the surface. There is a sculpture of swan standing in the middle of the pond.");
-                break;
-            case "tree":
-                if (season.equalsIgnoreCase("autumn")) {
-                    System.out.println("The maple tree features the autumn vibe. There are red, orange, and yellow leaves all over the ground.");
-                } else if (season.equalsIgnoreCase("winter")) {
-                    System.out.println("The bare branches of the oak tree are covered with a light dusting of snow, stark against the winter sky.");
-                }
-                break;
-            case "bird":
-                System.out.println("Birds are singing delightly.");
-                break;
-            default:
-                System.out.println("The"+ item + "can not be found in the botanic garden.");
-                break;
-        }
-        lastAction = "examine";
-    }
-
-    
-
-    /**
-     * The method is for visitors to use an item in the garden.
-     * @param item The item to use.
-     */
-    @Override
-    public void use(String item) {
-        // Example usage could be opening a map
-        if(item.equalsIgnoreCase("map")) {
-            System.out.println("You use the map to find your way to the botanic garden.");
-        } else {
-            System.out.println("You use " + item + ".");
+    public class SucculentHouse extends Place {
+        public SucculentHouse() {
+            super("Succulent House", "This is the Succulent House, the oldest section of Lyman, built in 1894. It holds xerophytes, or plants adapted to deserts and dry habitats, including New World cacti, Old World succulent euphorbias, and plants from families such as the Crassulaceae and Asphodelaceae.");
+            // Additional initialization code if needed
         }
     }
-
-    /**
-     * The method is for visitors to observes insects flying around in the garden.
-     * @param x The x-coordinate of the flight path.
-     * @param y The y-coordinate of the flight path.
-     * @return true if the observation was successful, false otherwise (e.g., no insects in sight).
-     */
-    @Override
-    public boolean fly(int x, int y) {
-        System.out.println("You watch a insect fluttering at coordinates (" + x + ", " + y + ").");
-        lastAction = "fly";
-        return true; 
-    }
-
-    /**
-     * The method is to represent the shrinking of a flower or plant in the garden.
-     * @return The new size of the flower after shrinking.
-     */
-    @Override
-    public Number shrink() {
-        flowerSize = Math.max(0, flowerSize - 1); 
-        System.out.println("A flower in the garden has shrunk.");
-        lastAction = "shrink";
-        return flowerSize;
-    }
-
-    /**
-     * The method is to represent the growth of a flower or plant in the garden.
-     * @return The new size of the flower after growing.
-     */
-    @Override
-    public Number grow() {
-        flowerSize = Math.min(2, flowerSize + 1); // Ensure flowerSize doesn't exceed 2
-        System.out.println("A flower in the garden has grown.");
-        lastAction = "grow";
-        return flowerSize;
-    }
-
-    /**
-     * The method is to allow the visitor (or their pet) to take a rest in the garden.
-     */
-    @Override
-    public void rest() {
-        isResting = true;
-        System.out.println("You take a moment to rest and enjoy the peaceful environment.");
-        lastAction = "rest";
-    }
-
-    /**
-     * The method is to undo the last action performed by the visitor.
-     */
-    @Override
-    public void undo() {
-        switch (lastAction) {
-            case "rest":
-                isResting = false;
-                System.out.println("You're now continuing your wonderful journey of exploring the botanic garden!");
-                break;
-            default:
-                System.out.println("There's nothing to undo.");
-                break;
+    
+    public class ShowHouse extends Place {
+        public ShowHouse() {
+            super("Show House", "Welcome to the Show House, where the first flower shows were staged. Today, it contains plants with foliar and floral scents, including salvias, mints, and geraniums, used in culinary, medicinal, and perfumery applications.");
+            // Additional initialization code if needed
         }
     }
-
-    public static void main(String[] args) {
-        BotanicGarden garden = new BotanicGarden();
     
-        System.out.println("Welcome to the Botanic Garden!");
-    
-        //spring
-        System.out.println("\n--- Spring ---");
-        garden.examine("flower");
-        garden.examine("bird");
-        garden.walk("north to the green room");
-    
-        //summer
-        garden.changeSeason();
-        System.out.println("\n--- Summer ---");
-        garden.examine("flower");
-        garden.rest();
-        garden.walk("east to the pond");
-        garden.examine("pond");
-    
-        //autumn
-        garden.changeSeason();
-        System.out.println("\n--- Autumn ---");
-        garden.examine("tree");
-        garden.grab("fallen leaf");
-        String leaf = garden.drop("fallen leaf");
-        System.out.println(leaf);
-    
-        //winter
-        garden.changeSeason();
-        System.out.println("\n--- Winter ---");
-        garden.examine("tree");
-        garden.rest();
-    
-        //Observing wildlife
-        garden.fly(5, 10); 
-        garden.examine("butterfly");
-    
-        //Interacting with the garden
-        garden.use("map"); // Pretend to use a map
-    
-        //Dynamic changes in the garden
-        garden.grow(); 
-        garden.shrink(); 
-        garden.undo();
+    public class FernHouse extends Place {
+        public FernHouse() {
+            super("Fern House", "The Fern House, with its curved glass ceiling, holds many non-hardy ferns, fern allies, and ancient plant lineages such as cycads and other early gymnosperms.");
+            // Additional initialization code if needed
+        }
     }
+    
+    public class PalmHouse extends Place {
+        public PalmHouse() {
+            super("Palm House", "The stately Palm House is filled with plants from tropical forests worldwide, featuring palms, trees, climbers, and epiphytes, in a warm and humid environment.");
+            // Additional initialization code if needed
+        }
+    }
+    
+    public class StoveHouse extends Place {
+        public StoveHouse() {
+            super("Stove House", "Stove House is populated with tropical orchids, bromeliads, and aquatic plants around the center pool. It originally housed the wood stove that warmed this section.");
+            // Additional initialization code if needed
+        }
+    }
+    
+    public class ColdStorageHouse extends Place {
+        public ColdStorageHouse() {
+            super("Cold Storage House", "The Cold Storage House, built in 1902, currently hosts the Spring Bulb and Fall Mum Show and serves as a display space for large flowering woody plants.");
+            // Additional initialization code if needed
+        }
+    }
+    
+    public class PhysiologyHouse extends Place {
+        public PhysiologyHouse() {
+            super("Physiology House", "This is the Physiology House, originally a laboratory and now hosting plant physiology classes. It also hosts the Spring Bulb and Fall Mum Shows.");
+            // Additional initialization code if needed
+        }
+    }
+    
+    public class CoolTemperateHouse extends Place {
+        public CoolTemperateHouse() {
+            super("Cool Temperate House", "Cool Temperate House showcases trees and shrubs from tropical montane or subtropical regions, requiring cool winter growing conditions.");
+            // Additional initialization code if needed
+        }
+    }
+    
+    public class CamelliaCorridor extends Place {
+        public CamelliaCorridor() {
+            super("Camellia Corridor", "The Camellia Corridor, reminiscent of European orangeries, grows plants that tolerate cool winter temperatures like camellias, citrus, and orchids.");
+            // Additional initialization code if needed
+        }
+    }
+    
+    public class GeneticsHouse extends Place {
+        public GeneticsHouse() {
+            super("Genetics House", "The Genetics House is part of the Blakeslee Range, used for holding dormant plants, growing out small or recently received plants, and staging flower shows.");
+            // Additional initialization code if needed
+        }
+    }
+    
+
 }
+
+   
