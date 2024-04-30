@@ -6,8 +6,10 @@ public class Bookstore extends Place {
     private int tshirts;
     private int grayHoodies;
     private int blueHoodies;
-    private int paper;
+    private int plainPaper;
+    private int linedPaper;
     private int pens;
+    private int pencils;
     private int earbuds;
     private int chargers;
     ArrayList<String> textbooks;
@@ -53,8 +55,10 @@ public class Bookstore extends Place {
         this.tshirts = 400;
         this.grayHoodies = 100;
         this.blueHoodies = 150;
-        this.paper = 700;
+        this.plainPaper = 700;
+        this.linedPaper = 800;
         this.pens = 500;
+        this.pencils = 600;
         this.earbuds = 200;
         this.chargers = 250;
         this.textbooks = new ArrayList<String> ();
@@ -128,12 +132,20 @@ public class Bookstore extends Place {
         }
     }
 
-    public void buyPaper(){
-        if (this.paper<1){
+    public void buyPlainPaper(){
+        if (this.plainPaper<1){
             System.out.println("Sorry, we're out of stock!");
         }
         else{
-            this.paper = paper - 1;
+            this.plainPaper = plainPaper - 1;
+        }
+    }
+    public void buyLinedPaper(){
+        if (this.linedPaper<1){
+            System.out.println("Sorry, we're out of stock!");
+        }
+        else{
+            this.linedPaper = linedPaper - 1;
         }
     }
     public void buyPen(){
@@ -142,6 +154,14 @@ public class Bookstore extends Place {
         }
         else{
             this.pens = pens - 1;
+        }
+    }
+    public void buyPencil(){
+        if (this.pencils<1){
+            System.out.println("Sorry, we're out of stock!");
+        }
+        else{
+            this.pencils = pencils - 1;
         }
     }
     public void buyEarbuds(){
@@ -260,7 +280,7 @@ public class Bookstore extends Place {
     class Doorway extends Place {
         public Doorway() {
             super("Doorway", "The place to enter and exit the bookstore.");
-            addItem(new Thing("Register", "Cheese-flavored corn chips."));
+            addItem(new Thing("Door", "A glass door with the Smith College logo."));
             
         }
     }
