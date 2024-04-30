@@ -31,7 +31,7 @@ public class Bookstore extends Place {
         sections.put("Office Supplies", new OfficeSection());
         sections.put("Doorway", new Doorway());
 
-        // Sections of bookstore
+        // Sections of bookstore - each section has an exit of the previous section as one moves farther back into the store
         ClothingSection clothing = (ClothingSection) sections.get("Clothing");
         clothing.setExit("south", sections.get("Doorway"));
         
@@ -45,10 +45,10 @@ public class Bookstore extends Place {
         snacks.setExit("south", sections.get("Electronics"));
 
         OfficeSection office = (OfficeSection) sections.get("Office Supplies");
-        snacks.setExit("south", sections.get("Snacks"));
+        office.setExit("south", sections.get("Snacks"));
 
-        Doorway doorway = (Doorway) sections.get("Office Supplies");
-        snacks.setExit("south", sections.get("Snacks"));
+        Doorway doorway = (Doorway) sections.get("Doorway");
+        office.setExit("south", sections.get("Door"));
 
 
     // Inventory stock numbers
@@ -181,7 +181,7 @@ public class Bookstore extends Place {
             }
         }
 
-
+// return methods for each product type
     public void returnShirt(int number){
         if(this.tshirts<400){
             this.tshirts=this.tshirts+number;
@@ -191,7 +191,7 @@ public class Bookstore extends Place {
         }
     }
     public void returnBlueHoodie(int number){
-        if(this.blueHoodies<400){
+        if(this.blueHoodies<150){
             this.blueHoodies=this.blueHoodies+number;
             System.out.println("You've returned " + number + "blue hoodie(s) successfully!");
         }else{
@@ -199,7 +199,7 @@ public class Bookstore extends Place {
         }
     }
     public void returnGrayHoodie(int number){
-        if(this.grayHoodies<400){
+        if(this.grayHoodies<100){
             this.grayHoodies=this.grayHoodies+number;
             System.out.println("You've returned " + number + "gray hoodie(s) successfully!");
         }else{
@@ -208,7 +208,15 @@ public class Bookstore extends Place {
     }
 
     public void returnPen(int number){
-        if(this.pens<400){
+        if(this.pens<500){
+            this.pens=this.pens+number;
+            System.out.println("You've returned " + number + "pens successfully!");
+        }else{
+            System.out.println("You haven't sold any to return!");
+        }
+    }
+    public void returnPencil(int number){
+        if(this.pencils<600){
             this.pens=this.pens+number;
             System.out.println("You've returned " + number + "pens successfully!");
         }else{
@@ -216,7 +224,7 @@ public class Bookstore extends Place {
         }
     }
     public void returnEarbuds(int number){
-        if(this.earbuds<400){
+        if(this.earbuds<200){
             this.earbuds=this.earbuds+number;
             System.out.println("You've returned " + number + "earbuds successfully!");
         }else{
@@ -224,7 +232,7 @@ public class Bookstore extends Place {
         }
     }
     public void returnCharger(int number){
-        if(this.chargers<400){
+        if(this.chargers<250){
             this.chargers=this.pens+number;
             System.out.println("You've returned " + number + "charger(s) successfully!");
         }else{
@@ -232,6 +240,7 @@ public class Bookstore extends Place {
         }
     }
 
+    // Creates sections with items in the store
     class ClothingSection extends Place {
         public ClothingSection() {
             super("Clothing", "Welcome to the clothing section. We have t-shirts, blue hoodies, and gray hoodies in stock.");
