@@ -13,6 +13,7 @@ public class Bookstore extends Place {
     private int earbuds;
     private int chargers;
     private int drives;
+    private int money;
     private Hashtable<String, Integer> textbooks;
     private Hashtable<String, Integer> snacks;
     private Map<String, Place> sections; 
@@ -52,7 +53,7 @@ public class Bookstore extends Place {
         office.setExit("south", sections.get("Snacks"));
 
         Doorway doorway = (Doorway) sections.get("Doorway");
-        office.setExit("south", sections.get("Library"));
+        doorway.setExit("south", new AlumniGym());
 
 
     // Inventory stock numbers
@@ -66,6 +67,7 @@ public class Bookstore extends Place {
         this.earbuds = 200;
         this.chargers = 250;
         this.drives = 300;
+        this.money = 100;
     
     // Array list contents for textbook selection
         textbooks.put("Calculus 100", 50);
@@ -131,7 +133,8 @@ public class Bookstore extends Place {
     }
     public void buyGrayHoodie(int number){
         this.grayHoodies = this.grayHoodies - number;
-        
+        this.money = this.money - 50*number;
+
         if (number>100){
             System.out.println("That's more than we have in stock!");
         }
@@ -144,6 +147,7 @@ public class Bookstore extends Place {
 
     public void buyBlueHoodie(int number){
         this.blueHoodies = this.blueHoodies - number;
+        this.money = this.money - 50*number;
         
         if (number>150){
             System.out.println("That's more than we have in stock!");
@@ -157,6 +161,7 @@ public class Bookstore extends Place {
 
     public void buyTShirt(int number){
         this.tshirts = this.tshirts - number;
+        this.money = this.money - 30*number;
         
         if (number>400){
             System.out.println("That's more than we have in stock!");
@@ -169,6 +174,7 @@ public class Bookstore extends Place {
     }
     public void buyPlainPaper(int number){
         this.plainPaper = this.plainPaper - number;
+        this.money = this.money - 10*number;
         
         if (number>700){
             System.out.println("That's more than we have in stock!");
@@ -181,6 +187,7 @@ public class Bookstore extends Place {
     }
     public void buyLinedPaper(int number){
         this.linedPaper = this.linedPaper - number;
+        this.money = this.money - 8*number;
         
         if (number>800){
             System.out.println("That's more than we have in stock!");
@@ -193,6 +200,7 @@ public class Bookstore extends Place {
     }
     public void buyPen(int number){
         this.pens = this.pens - number;
+        this.money = this.money - 6*number;
         
         if (number>500){
             System.out.println("That's more than we have in stock!");
@@ -205,6 +213,7 @@ public class Bookstore extends Place {
     }
     public void buyPencil(int number){
         this.pencils = this.pencils - number;
+        this.money = this.money - 5*number;
         
         if (number>600){
             System.out.println("That's more than we have in stock!");
@@ -217,6 +226,7 @@ public class Bookstore extends Place {
     }
     public void buyEarbuds(int number){
         this.earbuds = this.earbuds - number;
+        this.money = this.money - 12*number;
         
         if (number>200){
             System.out.println("That's more than we have in stock!");
@@ -229,6 +239,7 @@ public class Bookstore extends Place {
     }
     public void buyCharger(int number){
         this.chargers = this.chargers - number;
+        this.money = this.money - 10*number;
         
         if (number>250){
             System.out.println("That's more than we have in stock!");
@@ -241,6 +252,7 @@ public class Bookstore extends Place {
     }
     public void buyDrive(int number){
         this.drives = this.drives - number;
+        this.money = this.money - 20*number;
         
         if (number>300){
             System.out.println("That's more than we have in stock!");
@@ -256,6 +268,7 @@ public class Bookstore extends Place {
     public void returnShirt(int number){
         if(this.tshirts<400){
             this.tshirts=this.tshirts+number;
+            this.money = this.money + 30*number;
             System.out.println("You've returned " + number + " shirt(s) successfully!");
         }else{
             System.out.println("You haven't sold any to return!");
@@ -264,6 +277,7 @@ public class Bookstore extends Place {
     public void returnBlueHoodie(int number){
         if(this.blueHoodies<150){
             this.blueHoodies=this.blueHoodies+number;
+            this.money = this.money + 50*number;
             System.out.println("You've returned " + number + " blue hoodie(s) successfully!");
         }else{
             System.out.println("You haven't sold any to return!");
@@ -272,6 +286,7 @@ public class Bookstore extends Place {
     public void returnGrayHoodie(int number){
         if(this.grayHoodies<100){
             this.grayHoodies=this.grayHoodies+number;
+            this.money = this.money + 50*number;
             System.out.println("You've returned " + number + " gray hoodie(s) successfully!");
         }else{
             System.out.println("You haven't sold any to return!");
@@ -281,6 +296,7 @@ public class Bookstore extends Place {
     public void returnPen(int number){
         if(this.pens<500){
             this.pens=this.pens+number;
+            this.money = this.money + 6*number;
             System.out.println("You've returned " + number + " pens successfully!");
         }else{
             System.out.println("You haven't sold any to return!");
@@ -289,6 +305,7 @@ public class Bookstore extends Place {
     public void returnPencil(int number){
         if(this.pencils<600){
             this.pens=this.pens+number;
+            this.money = this.money + 5*number;
             System.out.println("You've returned " + number + " pencils successfully!");
         }else{
             System.out.println("You haven't sold any to return!");
@@ -297,6 +314,7 @@ public class Bookstore extends Place {
     public void returnEarbuds(int number){
         if(this.earbuds<200){
             this.earbuds=this.earbuds+number;
+            this.money = this.money + 12*number;
             System.out.println("You've returned " + number + " earbuds successfully!");
         }else{
             System.out.println("You haven't sold any to return!");
@@ -304,8 +322,18 @@ public class Bookstore extends Place {
     }
     public void returnCharger(int number){
         if(this.chargers<250){
-            this.chargers=this.pens+number;
+            this.chargers=this.chargers+number;
+            this.money = this.money + 10*number;
             System.out.println("You've returned " + number + " charger(s) successfully!");
+        }else{
+            System.out.println("You haven't sold any to return!");
+        }
+    }
+    public void returnDrive(int number){
+        if(this.drives<300){
+            this.drives=this.drives+number;
+            this.money = this.money + 20*number;
+            System.out.println("You've returned " + number + " drive(s) successfully!");
         }else{
             System.out.println("You haven't sold any to return!");
         }
