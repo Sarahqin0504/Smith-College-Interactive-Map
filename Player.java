@@ -10,11 +10,11 @@ public class Player extends Thing implements Contract{
     private String season = "";
     Scanner scanner = new Scanner(System.in);
 
-    public Player (String name, String description, Place currentPlace) {
+    public Player (String name, String description, Place startingPlace) {
         super(name, description);
         this.inventory = new ArrayList<>();
         // Set the default location to the first floor
-        this.currentPlace = currentPlace;
+        this.currentPlace = startingPlace;
     }
 
     public Place getCurrentPlace() {
@@ -23,6 +23,20 @@ public class Player extends Thing implements Contract{
 
     public void setCurrentPlace (Place currentPlace) {
         this.currentPlace = currentPlace;
+    }
+
+    public void move(String direction) {
+        Place nextPlace = currentPlace.getExit(direction);
+        if (nextPlace != null) {
+            currentPlace = nextPlace;
+            System.out.println("You move to: " + currentPlace.getDescription());
+        } else {
+            System.out.println("You can't go that way.");
+        }
+    }
+
+    public String getCurrentPlaceDescription() {
+        return currentPlace.getDescription();
     }
 
     /**

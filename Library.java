@@ -50,10 +50,6 @@ public class Library extends Place {
 
         ChapinLawn chapinLawn = (ChapinLawn) floors.get("Chapin Lawn");
         chapinLawn.setExit("south", floors.get("Compass Cafe"));
-        chapinLawn.setExit("south", new BotanicGarden());
-
-        AlumniGym alumniGym = (AlumniGym) floors.get("Alumni Gym");
-        alumniGym.setExit("south", new Bookstore(getName(), getDescription(), true));
 
     }
 

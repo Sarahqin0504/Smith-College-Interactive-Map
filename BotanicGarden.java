@@ -10,8 +10,8 @@ public class BotanicGarden extends Place{
     public BotanicGarden() {
         super("Botanic Garden", "This is the Botanic Garden");
         initializeRooms();
-        System.out.println("Welcome to the Botanic Garden of Smith College!");
-        System.out.println("Explore our Lyman Plant House featuring various unique botanical rooms.");
+        //System.out.println("Welcome to the Botanic Garden of Smith College!");
+        //System.out.println("Explore our Lyman Plant House featuring various unique botanical rooms.");
     }
 
     private void initializeRooms() {

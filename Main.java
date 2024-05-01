@@ -3,20 +3,19 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        
-        // Create a library map
-        Library library = new Library();
-        BotanicGarden botanicGarden = new BotanicGarden();
-   
-        
-        // Create a player and place them in the starting room (e.g., the first floor)
-        Player player = new Player("Player", "You are the player.", new FirstFloor());
+        GameSetup setup = new GameSetup(); // This should create and configure all places
+        Player player = new Player("player", "player", setup.getStartingPlace());
         
         // Welcome message
         System.out.println("Welcome to Smith College!");
-        System.out.println("You are currently at: " + player.getCurrentPlace().getName());
-        
+        System.out.println("You start in: " + player.getCurrentPlaceDescription()); // Should output library's description
 
+        // Movement commands to test
+        player.move("south"); // Moves to the bookstore
+        System.out.println("Now in: " + player.getCurrentPlaceDescription());
+        player.move("north"); // Moves back to the library
+        System.out.println("Now in: " + player.getCurrentPlaceDescription());
+        
         // Game loop
         while (true) {
             System.out.print("Enter your action: ");
@@ -28,6 +27,11 @@ public class Main {
                     System.out.print("Enter item to grab: ");
                     String itemToGrab = scanner.nextLine().trim().toLowerCase();
                     player.grab(itemToGrab);
+                    break;
+                case "move":
+                    System.out.print("Enter the direction: ");
+                    String directionToMove = scanner.nextLine().trim().toLowerCase();
+                    player.move(directionToMove);
                     break;
                 case "drop":
                     System.out.print("Enter item to drop: ");
