@@ -1,4 +1,4 @@
-import java.util.ArrayList;
+import java.util.Hashtable;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -12,8 +12,9 @@ public class Bookstore extends Place {
     private int pencils;
     private int earbuds;
     private int chargers;
-    ArrayList<String> textbooks;
-    ArrayList<String> snack;
+    private int drives;
+    private Hashtable<String, Integer> textbooks;
+    private Hashtable<String, Integer> snacks;
     private Map<String, Place> sections; 
     
 
@@ -22,6 +23,8 @@ public class Bookstore extends Place {
 
         // Initialize map
         this.sections = new HashMap<>();
+        this.textbooks = new Hashtable<String, Integer>();
+        this.snacks = new Hashtable<String, Integer>();
 
         // Add sections to the store
         sections.put("Clothing", new ClothingSection());
@@ -30,6 +33,7 @@ public class Bookstore extends Place {
         sections.put("Snacks", new SnackSection());
         sections.put("Office Supplies", new OfficeSection());
         sections.put("Doorway", new Doorway());
+
 
         // Sections of bookstore - each section has an exit of the previous section as one moves farther back into the store
         ClothingSection clothing = (ClothingSection) sections.get("Clothing");
@@ -41,14 +45,14 @@ public class Bookstore extends Place {
         TechSection tech = (TechSection) sections.get("Electronics");
         tech.setExit("south", sections.get("Books"));
 
-        SnackSection snacks = (SnackSection) sections.get("Snacks");
-        snacks.setExit("south", sections.get("Electronics"));
+        SnackSection snack = (SnackSection) sections.get("Snacks");
+        snack.setExit("south", sections.get("Electronics"));
 
         OfficeSection office = (OfficeSection) sections.get("Office Supplies");
         office.setExit("south", sections.get("Snacks"));
 
         Doorway doorway = (Doorway) sections.get("Doorway");
-        office.setExit("south", sections.get("Door"));
+        office.setExit("south", sections.get("Library"));
 
 
     // Inventory stock numbers
@@ -61,24 +65,26 @@ public class Bookstore extends Place {
         this.pencils = 600;
         this.earbuds = 200;
         this.chargers = 250;
-        this.textbooks = new ArrayList<String> ();
-        this.snack = new ArrayList<String> ();
-
-
+        this.drives = 300;
+    
     // Array list contents for textbook selection
-        textbooks.add("Calculus 100");
-        textbooks.add("Spanish 101");
-        textbooks.add("Quantum Mechanics");
-        textbooks.add("American History");
-        textbooks.add("Foundational Astronomy");
+        textbooks.put("Calculus 100", 50);
+        textbooks.put("Spanish 101", 20);
+        textbooks.put("Quantum Mechanics", 15);
+        textbooks.put("American History", 30);
+        textbooks.put("Foundational Astronomy", 10);
     // Array list contents for snack selection
-        snack.add("Popcorn");
-        snack.add("Jelly Beans");
-        snack.add("Potato Chips");
-        snack.add("Chocolate");
-        snack.add("Doritos");
+        snacks.put("Popcorn",30);
+        snacks.put("Jelly Beans", 25);
+        snacks.put("Potato Chips", 30);
+        snacks.put("Chocolate", 50);
+        snacks.put("Doritos", 30);
         System.out.println("Entering the Bookstore...");
     }
+
+    public Boolean containsItem(String item){
+        return this.textbooks.get(item)<0;
+        }
 
     // Shows item menu
     public void printSelection(){
@@ -105,87 +111,152 @@ public class Bookstore extends Place {
 
 
     // Buy methods for each product type
-    public void buyGrayHoodie(){
+    public void buyTextbook(String item, int number){
+        if(containsItem(item)){
+            int num = this.textbooks.get(item)-number;
+            this.textbooks.replace(item, num);
+            System.out.println(number + " copies of " + item + " purchased successfully!");
+            
+             }
+        
+    }
+    public void buySnack(String item, int number){
+        if(containsItem(item)){
+            int num = this.snacks.get(item)-number;
+            this.snacks.replace(item, num);
+            System.out.println(item + "purchased successfully!");
+            
+             }
+        
+    }
+    public void buyGrayHoodie(int number){
+        this.grayHoodies = this.grayHoodies - number;
+        
+        if (number>100){
+            System.out.println("That's more than we have in stock!");
+        }
+
         if (this.grayHoodies<1){
             System.out.println("Sorry, we're out of stock!");
         }
-        else{
-            this.grayHoodies = grayHoodies - 1;
-        }
+        
     }
 
-    public void buyBlueHoodie(){
+    public void buyBlueHoodie(int number){
+        this.blueHoodies = this.blueHoodies - number;
+        
+        if (number>150){
+            System.out.println("That's more than we have in stock!");
+        }
+
         if (this.blueHoodies<1){
             System.out.println("Sorry, we're out of stock!");
         }
-        else{
-            this.blueHoodies = blueHoodies - 1;
-        }
+        
     }
 
-    public void buyTshirt(){
+    public void buyTShirt(int number){
+        this.tshirts = this.tshirts - number;
+        
+        if (number>400){
+            System.out.println("That's more than we have in stock!");
+        }
+
         if (this.tshirts<1){
             System.out.println("Sorry, we're out of stock!");
         }
-        else{
-            this.tshirts = tshirts - 1;
-        }
+        
     }
+    public void buyPlainPaper(int number){
+        this.plainPaper = this.plainPaper - number;
+        
+        if (number>700){
+            System.out.println("That's more than we have in stock!");
+        }
 
-    public void buyPlainPaper(){
         if (this.plainPaper<1){
             System.out.println("Sorry, we're out of stock!");
         }
-        else{
-            this.plainPaper = plainPaper - 1;
-        }
+        
     }
-    public void buyLinedPaper(){
+    public void buyLinedPaper(int number){
+        this.linedPaper = this.linedPaper - number;
+        
+        if (number>800){
+            System.out.println("That's more than we have in stock!");
+        }
+
         if (this.linedPaper<1){
             System.out.println("Sorry, we're out of stock!");
         }
-        else{
-            this.linedPaper = linedPaper - 1;
-        }
+        
     }
-    public void buyPen(){
+    public void buyPen(int number){
+        this.pens = this.pens - number;
+        
+        if (number>500){
+            System.out.println("That's more than we have in stock!");
+        }
+
         if (this.pens<1){
             System.out.println("Sorry, we're out of stock!");
         }
-        else{
-            this.pens = pens - 1;
-        }
+        
     }
-    public void buyPencil(){
+    public void buyPencil(int number){
+        this.pencils = this.pencils - number;
+        
+        if (number>600){
+            System.out.println("That's more than we have in stock!");
+        }
+
         if (this.pencils<1){
             System.out.println("Sorry, we're out of stock!");
         }
-        else{
-            this.pencils = pencils - 1;
-        }
+        
     }
-    public void buyEarbuds(){
+    public void buyEarbuds(int number){
+        this.earbuds = this.earbuds - number;
+        
+        if (number>200){
+            System.out.println("That's more than we have in stock!");
+        }
+
         if (this.earbuds<1){
             System.out.println("Sorry, we're out of stock!");
         }
-        else{
-            this.earbuds = earbuds - 1;
-        }
+        
     }
-    public void buycharger(){
-        if (this.chargers<1){
-                System.out.println("Sorry, we're out of stock!");
-            }
-        else{
-                this.chargers = chargers - 1;
-            }
+    public void buyCharger(int number){
+        this.chargers = this.chargers - number;
+        
+        if (number>250){
+            System.out.println("That's more than we have in stock!");
         }
+
+        if (this.chargers<1){
+            System.out.println("Sorry, we're out of stock!");
+        }
+        
+    }
+    public void buyDrive(int number){
+        this.drives = this.drives - number;
+        
+        if (number>300){
+            System.out.println("That's more than we have in stock!");
+        }
+
+        if (this.drives<1){
+            System.out.println("Sorry, we're out of stock!");
+        }
+        
+    }
 
 // return methods for each product type
     public void returnShirt(int number){
         if(this.tshirts<400){
             this.tshirts=this.tshirts+number;
-            System.out.println("You've returned " + number + "shirt(s) successfully!");
+            System.out.println("You've returned " + number + " shirt(s) successfully!");
         }else{
             System.out.println("You haven't sold any to return!");
         }
@@ -193,7 +264,7 @@ public class Bookstore extends Place {
     public void returnBlueHoodie(int number){
         if(this.blueHoodies<150){
             this.blueHoodies=this.blueHoodies+number;
-            System.out.println("You've returned " + number + "blue hoodie(s) successfully!");
+            System.out.println("You've returned " + number + " blue hoodie(s) successfully!");
         }else{
             System.out.println("You haven't sold any to return!");
         }
@@ -201,7 +272,7 @@ public class Bookstore extends Place {
     public void returnGrayHoodie(int number){
         if(this.grayHoodies<100){
             this.grayHoodies=this.grayHoodies+number;
-            System.out.println("You've returned " + number + "gray hoodie(s) successfully!");
+            System.out.println("You've returned " + number + " gray hoodie(s) successfully!");
         }else{
             System.out.println("You haven't sold any to return!");
         }
@@ -210,7 +281,7 @@ public class Bookstore extends Place {
     public void returnPen(int number){
         if(this.pens<500){
             this.pens=this.pens+number;
-            System.out.println("You've returned " + number + "pens successfully!");
+            System.out.println("You've returned " + number + " pens successfully!");
         }else{
             System.out.println("You haven't sold any to return!");
         }
@@ -218,7 +289,7 @@ public class Bookstore extends Place {
     public void returnPencil(int number){
         if(this.pencils<600){
             this.pens=this.pens+number;
-            System.out.println("You've returned " + number + "pens successfully!");
+            System.out.println("You've returned " + number + " pencils successfully!");
         }else{
             System.out.println("You haven't sold any to return!");
         }
@@ -226,7 +297,7 @@ public class Bookstore extends Place {
     public void returnEarbuds(int number){
         if(this.earbuds<200){
             this.earbuds=this.earbuds+number;
-            System.out.println("You've returned " + number + "earbuds successfully!");
+            System.out.println("You've returned " + number + " earbuds successfully!");
         }else{
             System.out.println("You haven't sold any to return!");
         }
@@ -234,7 +305,7 @@ public class Bookstore extends Place {
     public void returnCharger(int number){
         if(this.chargers<250){
             this.chargers=this.pens+number;
-            System.out.println("You've returned " + number + "charger(s) successfully!");
+            System.out.println("You've returned " + number + " charger(s) successfully!");
         }else{
             System.out.println("You haven't sold any to return!");
         }
@@ -294,7 +365,32 @@ public class Bookstore extends Place {
         }
     }
 
+    public static void main(String[] args) {
+        Bookstore store = new Bookstore();
+        System.out.println("Welcome to the Smith College Bookstore!");
+        store.buyGrayHoodie(700);
+        store.buyGrayHoodie(3);
+        store.containsItem("Calculus 100");
+        store.buyTextbook("Calculus 100", 2);
+        
+
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
 }
+
+
 
 
 
