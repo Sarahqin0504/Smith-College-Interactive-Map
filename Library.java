@@ -53,7 +53,7 @@ public class Library extends Place {
         alumniGym.setExit("north", floors.get("Ground Floor"));
 
         SeelyeLawn seelyeLawn = (SeelyeLawn) floors.get("Seelye Lawn");
-        seelyeLawn.setExit("west", floors.get("First Floor"))
+        seelyeLawn.setExit("west", floors.get("First Floor"));
 
     }
 
