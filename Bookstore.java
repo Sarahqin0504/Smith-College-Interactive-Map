@@ -100,7 +100,7 @@ public class Bookstore extends Place {
         // snacks.put("Potato Chips", chipsArray);
         // snacks.put("Chocolate", chocoArray);
         // snacks.put("Doritos", doritosArray);
-        System.out.println("Entering the Bookstore...");
+        // System.out.println("Entering the Bookstore...");
     }
 
     class ClothingSection extends Place {
