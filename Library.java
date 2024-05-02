@@ -6,7 +6,7 @@ public class Library extends Place {
     private Map<String, Place> floors; 
 
     public Library() {
-        super("Library", "Main library building");
+        super("Library", "Neilson library");
 
         // Initialize the HashMap
         floors = new HashMap<>();
@@ -26,11 +26,11 @@ public class Library extends Place {
 
         // Set exits for each floor
         GroundFloor groundFloor = (GroundFloor) floors.get("Ground Floor");
-        groundFloor.setExit("south", new AlumniGym());
+        groundFloor.setExit("south", floors.get("Alumni Gym"));
         groundFloor.setExit("west", floors.get("Burton Lawn"));
 
         FirstFloor firstFloor = (FirstFloor) floors.get("First Floor");
-        firstFloor.setExit("north", new CompassCafe());
+        firstFloor.setExit("north", floors.get("Compass Cafe"));
         firstFloor.setExit("east", floors.get("Seelye Lawn"));
 
         CompassCafe compassCafe = (CompassCafe) floors.get("Compass Cafe");
@@ -74,7 +74,7 @@ class FirstFloor extends Place {
         super("First Floor", "This is the First Floor. There is a Front desk and the Compass Cafe. Exit to the north and east.");
         // Add items or customize as needed
         addItem(new Thing("Front Desk", "You can ask questions here"));
-        addItem(new Thing("Table", "An interesting flower table"));
+        addItem(new Thing("Table", "An interesting looking table"));
         addItem(new Thing("One card", "Lost Onecard"));
     }
 }

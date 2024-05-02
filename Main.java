@@ -8,7 +8,7 @@ public class Main {
         
         // Welcome message
         System.out.println("Welcome to Smith College!");
-        System.out.println("You start in: " + player.getCurrentPlaceDescription()); // Should output library's description
+        System.out.println("You start in: " + player.getCurrentPlace().getName()); // Should output library's description
 
         // Game loop
         while (true) {
@@ -37,6 +37,10 @@ public class Main {
                     String itemToExamine = scanner.nextLine().trim().toLowerCase();
                     player.examine(itemToExamine);
                     break;
+                case "look around":
+                    Place lookPlace = player.getCurrentPlace();
+                    System.out.println(player.lookAround(lookPlace));
+                    break;
                 case "use":
                     System.out.print("Enter item to use: ");
                     String itemToUse = scanner.nextLine().trim().toLowerCase();
@@ -46,13 +50,19 @@ public class Main {
                     Place currentPlace = player.getCurrentPlace();
                     String building = currentPlace.getName();
                     player.enter(building);
-                    System.out.println("You are currently in " + player.getCurrentPlace().getName());
+                    System.out.println("Entering into " + player.getCurrentPlace().getName());
                     break;
                 case "exit":
                     Place exitPlace = player.getCurrentPlace();
                     String exit = exitPlace.getName();
                     player.exit(exit);
-                    System.out.println("You are currently in " + player.getCurrentPlace().getName());
+                    System.out.println("Exiting into " + player.getCurrentPlace().getName());
+                    break;
+                case "elevator":
+                    System.out.println("Enter floor number for the elevator:");
+                    int floorNumber = scanner.nextInt();
+                    player.elevator(floorNumber);
+                    System.out.println("You are approaching " + player.getCurrentPlace().getName() + " and arrived");
                     break;
                 case "quit":
                     System.out.println("Goodbye!");

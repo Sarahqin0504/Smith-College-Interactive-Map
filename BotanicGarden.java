@@ -11,6 +11,7 @@ public class BotanicGarden extends Place {
         rooms.put("Church Gallery", new ChurchGallery());
         rooms.put("Succulent House", new SucculentHouse());
         rooms.put("Show House", new ShowHouse());
+        
     }
 
     public Map<String, Place> getRooms() {
