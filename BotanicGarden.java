@@ -51,7 +51,7 @@ public class BotanicGarden extends Place {
 
 class ChurchGallery extends Place {
     public ChurchGallery() {
-        super("Church Gallery", "Church Gallery. As you enter the Church Room, you're greeted by an introductory board detailing the room's history and botanical significance. To your right, a front desk displays leaflets and small plants, each carefully labeled. To the east, two doorways lead to themed exhibition rooms, inviting exploration. Directly north, a passageway adorned with hanging greenery offers a path deeper into the garden. The room combines historical charm with a celebration of plant life.");
+        super("Church Gallery", "Church Gallery. As you enter the Church Room, you're greeted by an introductory board detailing the room's history and botanical significance. To your right, a front desk displays leaflets and small plants, each carefully labeled. To the east, two doorways lead to themed exhibition rooms, inviting exploration. Directly north, a passageway adorned with hanging greenery offers a path deeper into the garden. The room combines historical charm with a celebration of plant life. The exit to the outdoor garden is to the south.");
         addItem(new Thing("Introductory board", "The Church Gallery is located in the front of the building downstairs from the reception area. The primary function of the Church Gallery is to serve as a space for education. The space features changing exhibitions on a variety of botanical and horticultural themes. "));
         addItem(new Thing("Front Desk", "You can book a tour here and consult questions regarding the Lymant Plant House."));
     }
@@ -59,7 +59,7 @@ class ChurchGallery extends Place {
 
 class Exhibition1 extends Place{
     public Exhibition1(){
-        super("Exhibition 1", "Plant Life Through the Ages Exhibition. Plant Life Through the Ages consists of eight panels depicting great moments in plant evolution. It is a significant body of work because while there are numerous depictions of animal evolution, there had been no mural devoted to the evolution of plants until this work. ");
+        super("Exhibition 1", "Plant Life Through the Ages Exhibition. Plant Life Through the Ages consists of eight panels depicting great moments in plant evolution. It is a significant body of work because while there are numerous depictions of animal evolution, there had been no mural devoted to the evolution of plants until this work.There is another exhibition room to the east.");
     }       
 }
 
@@ -72,7 +72,7 @@ class Exhibition2 extends Place{
 }
 class SucculentHouse extends Place {
     public SucculentHouse() {
-        super("SucculentHouse", "Succulent House. This is the Succulent House, the oldest section of Lyman, built in 1894. It holds xerophytes, or plants adapted to deserts and dry habitats, including New World cacti, Old World succulent euphorbias, and plants from families such as the Crassulaceae and Asphodelaceae.");
+        super("SucculentHouse", "Succulent House. This is the Succulent House, the oldest section of Lyman, built in 1894. It holds xerophytes, or plants adapted to deserts and dry habitats, including New World cacti, Old World succulent euphorbias, and plants from families such as the Crassulaceae and Asphodelaceae. Show room is to the north.");
         // Add items to the ground floor inventory
         addItem(new Thing("New World cacti", "New World Cacti refers to the cacti that are native to the Americas. Cacti are a family of plants known scientifically as Cactaceae. They are mostly found in regions that range from Patagonia in South America through to areas of western Canada. "));
         addItem(new Thing("Old World succulent euphorbias", "Old World Cacti refer to succulent plants that resemble cacti and are native to the Old World (Africa, Europe, and Asia). These are not true cacti but are often part of different succulent families such as Euphorbiaceae or Crassulaceae."));
