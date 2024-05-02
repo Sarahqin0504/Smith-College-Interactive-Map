@@ -24,7 +24,7 @@ public class Library extends Place {
         floors.put("Seelye Lawn", new SeelyeLawn());
         floors.put("Alumni Gym", new AlumniGym());
 
-        // Set exits for each floor
+         // Set exits for each floor
         GroundFloor groundFloor = (GroundFloor) floors.get("Ground Floor");
         groundFloor.setExit("south", floors.get("Alumni Gym"));
         groundFloor.setExit("west", floors.get("Burton Lawn"));
@@ -36,7 +36,6 @@ public class Library extends Place {
         CompassCafe compassCafe = (CompassCafe) floors.get("Compass Cafe");
         compassCafe.setExit("north", floors.get("Chapin Lawn"));
         compassCafe.setExit("south", floors.get("First Floor"));
-        compassCafe.setExit("west", floors.get("Burton Lawn"));
 
         FourthFloor fourthFloor = (FourthFloor) floors.get("Fourth Floor");
         fourthFloor.setExit("west", floors.get("Terrace"));
@@ -46,10 +45,15 @@ public class Library extends Place {
 
         BurtonLawn burtonLawn = (BurtonLawn) floors.get("Burton Lawn");
         burtonLawn.setExit("east", floors.get("Ground Floor"));
-        burtonLawn.setExit("north", floors.get("Chapin Lawn"));
 
         ChapinLawn chapinLawn = (ChapinLawn) floors.get("Chapin Lawn");
         chapinLawn.setExit("south", floors.get("Compass Cafe"));
+
+        AlumniGym alumniGym = (AlumniGym) floors.get("Alumni Gym");
+        alumniGym.setExit("north", floors.get("Ground Floor"));
+
+        SeelyeLawn seelyeLawn = (SeelyeLawn) floors.get("Seelye Lawn");
+        seelyeLawn.setExit("west", floors.get("First Floor"))
 
     }
 
