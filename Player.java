@@ -41,10 +41,9 @@ public class Player extends Thing implements Contract{
                 currentPlace = setup.getLibrary().getFloors().get("First Floor");
                 break;
             case "botanic garden":
-                currentPlace = setup.getBotanicGarden().getRooms().get("Outdoor Garden");
+                currentPlace = setup.getBotanicGarden().getRooms().get("Church Gallery");
+                System.out.println("You are now in Lyman Plant House.");
                 break;
-            case "outdoor garden":
-                setCurrentPlace(setup.getBotanicGarden().getRooms().get("Lyman Plant House"));
             default:
                 System.out.println("Invalid building.");
                 break;
@@ -56,7 +55,7 @@ public class Player extends Thing implements Contract{
             case "First Floor":
                 setCurrentPlace(this.setup.getLibrary());
                 break;
-            case "Outdoor Garden":
+            case "Church Gallery":
                 setCurrentPlace(this.setup.getBotanicGarden());
                 break;
             default:

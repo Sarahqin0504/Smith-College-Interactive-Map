@@ -74,7 +74,7 @@ class FirstFloor extends Place {
         super("First Floor", "This is the First Floor. There is a Front desk and the Compass Cafe. Exit to the north and east.");
         // Add items or customize as needed
         addItem(new Thing("Front Desk", "You can ask questions here"));
-        addItem(new Thing("Table", "An interesting looking table"));
+        addItem(new Thing("Table", "An interesting flower table"));
         addItem(new Thing("One card", "Lost Onecard"));
     }
 }
