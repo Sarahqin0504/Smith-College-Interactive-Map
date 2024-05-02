@@ -7,16 +7,15 @@ public class Player extends Thing implements Contract{
     private boolean isResting = false;
     private String lastAction = "";
     Scanner scanner = new Scanner(System.in);
+    GameSetup setup = new GameSetup();
 
-    public Player (String name, String description, Place startingPlace) {
+    public Player (String name, String description, Place startingPlace, GameSetup setup) {
         super(name, description);
         this.inventory = new ArrayList<>();
         // Set the default location to the first floor
         this.currentPlace = startingPlace;
+        this.setup = setup;
     }
-
-    Library library = new Library();
-    BotanicGarden botanicGarden = new BotanicGarden();
 
     public Place getCurrentPlace() {
         return currentPlace;
@@ -39,11 +38,13 @@ public class Player extends Thing implements Contract{
     public void enter(String building) {
         switch (building.toLowerCase()) {
             case "library":
-                currentPlace = library.getFloors().get("First Floor");
+                currentPlace = setup.getLibrary().getFloors().get("First Floor");
                 break;
             case "botanic garden":
-                currentPlace = botanicGarden.getRooms().get("Outdoor Garden");
+                currentPlace = setup.getBotanicGarden().getRooms().get("Outdoor Garden");
                 break;
+            case "outdoor garden":
+                setCurrentPlace(setup.getBotanicGarden().getRooms().get("Lyman Plant House"));
             default:
                 System.out.println("Invalid building.");
                 break;
@@ -51,12 +52,12 @@ public class Player extends Thing implements Contract{
     }
 
     public void exit(String building) {
-        switch (building.toLowerCase()) {
+        switch (building) {
             case "First Floor":
-                currentPlace = library;
+                setCurrentPlace(this.setup.getLibrary());
                 break;
             case "Outdoor Garden":
-                currentPlace = botanicGarden;
+                setCurrentPlace(this.setup.getBotanicGarden());
                 break;
             default:
                 System.out.println("Invalid destination.");

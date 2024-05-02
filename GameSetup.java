@@ -1,7 +1,7 @@
 public class GameSetup {
-    private Place botanicGarden;
-    private Place library;
-    private Place bookstore;
+    private BotanicGarden botanicGarden;
+    private Library library;
+    private Bookstore bookstore;
 
     public GameSetup() {
         // Instantiate each place once
@@ -20,5 +20,13 @@ public class GameSetup {
 
     public Place getStartingPlace() {
         return library; // Or wherever you want the player to start
+    }
+
+    public Library getLibrary() {
+        return this.library;
+    }
+
+    public BotanicGarden getBotanicGarden() {
+        return this.botanicGarden;
     }
 }

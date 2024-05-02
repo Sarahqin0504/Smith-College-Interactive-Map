@@ -4,7 +4,7 @@ public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         GameSetup setup = new GameSetup(); // This should create and configure all places
-        Player player = new Player("player", "player", setup.getStartingPlace());
+        Player player = new Player("player", "player", setup.getStartingPlace(), setup);
         
         // Welcome message
         System.out.println("Welcome to Smith College!");
@@ -51,8 +51,9 @@ public class Main {
                 case "exit":
                     Place exitPlace = player.getCurrentPlace();
                     String exit = exitPlace.getName();
-                    player.enter(exit);
+                    player.exit(exit);
                     System.out.println("You are currently in " + player.getCurrentPlace().getName());
+                    break;
                 case "quit":
                     System.out.println("Goodbye!");
                     scanner.close();
