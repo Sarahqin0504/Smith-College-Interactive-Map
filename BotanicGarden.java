@@ -14,6 +14,7 @@ public class BotanicGarden extends Place {
         rooms.put("Show House", new ShowHouse());
         rooms.put("Exhibition 1", new Exhibition1());
         rooms.put("Exhibition 2", new Exhibition2());
+        rooms.put("Outdoor Garden", new OutdoorGarden());
 
         
 
@@ -34,8 +35,12 @@ public class BotanicGarden extends Place {
         succulentHouse.setExit("south", rooms.get("Church Gallery"));
 
         ShowHouse showHouse = (ShowHouse) rooms.get("Show House");
-        showHouse.setExit("east", rooms.get("Fern House"));
+        showHouse.setExit("east", rooms.get("Outdoor Garden"));
         showHouse.setExit("south", rooms.get("Succulent House"));
+        showHouse.setExit("north", rooms.get("Outdoor Garden"));
+
+        OutdoorGarden outdoorGarden = (OutdoorGarden) rooms.get("Outdoor Garden");
+        outdoorGarden.setExit("north", rooms.get("Church Gallery"));
 
     }
 
@@ -79,16 +84,15 @@ class SucculentHouse extends Place {
 class ShowHouse extends Place {
     public ShowHouse() {
         super("ShowHouse", "Welcome to the Show House, where the first flower shows were staged. Today, it contains plants with foliar and floral scents, including salvias, mints, and geraniums, used in culinary, medicinal, and perfumery applications.");
-        addItem(new Thing("Book", "Interactive Linear Algebra"));
-        addItem(new Thing("Front Desk", "You can borrow and return books"));
-        addItem(new Thing("Faculty One card", "You can access different exits"));
+        addItem(new Thing("salvias", "Salvias generally prefer locations with full sun and well-draining soil. They are drought-tolerant once established, making them suitable for xeriscaping or gardens in drier climates. The care and maintenance of salvia plants will depend on the species; some may be annuals, while others are perennials or biennials."));
+        addItem(new Thing("mints", "The mint genus comprises numerous species and hybrids known for their distinctively sharp, cool flavor and fragrance, which is attributed to the compound menthol found in their leaves. Mint plants are hardy and grow well in moist, well-drained soils, preferably in full to partial sunlight. "));
     }
 }
 
-class FernHouse extends Place {
-    public FernHouse() {
-        super("Fern House", "The curved glass ceiling of Fern House identifies it as part of the Lord & Burnham expansion in 1895 which included Palm, Stove, and Warm Temperate Houses. Originally housing a diverse collection of acacias, and later becoming the cactus and succulent house, Fern House today holds many non-hardy ferns, fern allies, and other ancient plant lineages such as cycads and other early gymnosperms.");
-        addItem(new Thing("Book", "Interactive Linear Algebra"));
+class OutdoorGarden extends Place {
+    public OutdoorGarden() {
+        super("Outdoor Garden", "You have enter the Systematics Garden. Students can observe and compare flower types and growth forms among the garden’s species, chosen for their botanical and evolutionary interest. As one of our oldest gardens, it not only holds Smith’s history of learning, but also the centuries-long quest of the botanical science community to better understand how plants became what they are today. ");
+        addItem(new Thing("Book", "There is a linear algebra textbook on the bench. Maybe someone left it here."));
         addItem(new Thing("Front Desk", "You can borrow and return books"));
         addItem(new Thing("Faculty One card", "You can access different exits"));
     }
