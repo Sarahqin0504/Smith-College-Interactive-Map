@@ -56,7 +56,7 @@ public class Main {
                     Place exitPlace = player.getCurrentPlace();
                     String exit = exitPlace.getName();
                     player.exit(exit);
-                    System.out.println("Exiting into " + player.getCurrentPlace().getName());
+                    System.out.println("Exiting " + player.getCurrentPlace().getName());
                     break;
                 case "elevator":
                     System.out.println("Enter floor number for the elevator:");

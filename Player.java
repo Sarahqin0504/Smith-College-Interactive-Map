@@ -67,6 +67,9 @@ public class Player extends Thing implements Contract{
             case "Church Gallery":
                 setCurrentPlace(this.setup.getBotanicGarden());
                 break;
+            case"Doorway":
+                setCurrentPlace(this.setup.getBookstore());
+                break;
             default:
                 System.out.println("Invalid destination.");
                 break;
@@ -101,6 +104,7 @@ public class Player extends Thing implements Contract{
                 case 4:
                     currentPlace = setup.getLibrary().getFloors().get("Fourth Floor");
                     // System.out.println("You are now at the Fourth Floor.");
+                    break;
                 default:
                     // If the input doesn't match any floor number, inform the player
                     System.out.println("Invalid floor number.");
