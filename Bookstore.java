@@ -49,11 +49,11 @@ public class Bookstore extends Place {
         
         BookSection books = (BookSection) sections.get("Books");
         books.setExit("south", sections.get("Clothing"));
-        clothing.setExit("west", sections.get("Electronics"));
+        books.setExit("west", sections.get("Electronics"));
 
         TechSection tech = (TechSection) sections.get("Electronics");
         tech.setExit("east", sections.get("Books"));
-        clothing.setExit("north", sections.get("Office Supplies"));
+        tech.setExit("north", sections.get("Office Supplies"));
 
         OfficeSection office = (OfficeSection) sections.get("Office Supplies");
         office.setExit("south", sections.get("Electronics"));
