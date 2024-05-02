@@ -93,7 +93,5 @@ class OutdoorGarden extends Place {
     public OutdoorGarden() {
         super("Outdoor Garden", "You have enter the Systematics Garden. Students can observe and compare flower types and growth forms among the garden’s species, chosen for their botanical and evolutionary interest. As one of our oldest gardens, it not only holds Smith’s history of learning, but also the centuries-long quest of the botanical science community to better understand how plants became what they are today. ");
         addItem(new Thing("Book", "There is a linear algebra textbook on the bench. Maybe someone left it here."));
-        addItem(new Thing("Front Desk", "You can borrow and return books"));
-        addItem(new Thing("Faculty One card", "You can access different exits"));
     }
 }
