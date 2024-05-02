@@ -77,7 +77,7 @@ class SucculentHouse extends Place {
         addItem(new Thing("New World cacti", "New World Cacti refers to the cacti that are native to the Americas. Cacti are a family of plants known scientifically as Cactaceae. They are mostly found in regions that range from Patagonia in South America through to areas of western Canada. "));
         addItem(new Thing("Old World succulent euphorbias", "Old World Cacti refer to succulent plants that resemble cacti and are native to the Old World (Africa, Europe, and Asia). These are not true cacti but are often part of different succulent families such as Euphorbiaceae or Crassulaceae."));
         addItem(new Thing("Crassulaceae", "The Crassulaceae family, commonly known as the stonecrop family or the orpine family, is a diverse group of succulent plants that are well adapted to arid and semi-arid environments."));
-        addItem(new Thing("Asphodelaceae","\n" + "The Asphodelaceae family is a group of flowering plants primarily native to temperate and tropical regions of Africa, Europe, and Asia. This family includes various genera such as Asphodelus, Aloe, Kniphofia, and Haworthia, which are well-known for their distinctive and often striking appearances."));
+        addItem(new Thing("Asphodelaceae", "The Asphodelaceae family is a group of flowering plants primarily native to temperate and tropical regions of Africa, Europe, and Asia. This family includes various genera such as Asphodelus, Aloe, Kniphofia, and Haworthia, which are well-known for their distinctive and often striking appearances."));
     }
 }
 
