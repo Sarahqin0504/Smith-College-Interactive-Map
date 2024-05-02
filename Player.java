@@ -25,6 +25,11 @@ public class Player extends Thing implements Contract{
         this.currentPlace = currentPlace;
     }
 
+    // Method to get the list of items from the current place
+    public List<Thing> getCurrentPlaceItems() {
+        return currentPlace.getList();
+    }
+
     public void move(String direction) {
         Place nextPlace = currentPlace.getExit(direction);
         if (nextPlace != null) {
