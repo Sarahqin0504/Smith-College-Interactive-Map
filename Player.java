@@ -25,6 +25,15 @@ public class Player extends Thing implements Contract{
         this.currentPlace = currentPlace;
     }
 
+    public String getCurrentPlaceDescription() {
+        return currentPlace.getDescription();
+    }
+
+    // Method to get the list of items from the current place
+    public List<Thing> getCurrentPlaceItems() {
+        return currentPlace.getList();
+    }
+
     public void move(String direction) {
         Place nextPlace = currentPlace.getExit(direction);
         if (nextPlace != null) {
@@ -64,10 +73,6 @@ public class Player extends Thing implements Contract{
         }
     }
 
-    public String getCurrentPlaceDescription() {
-        return currentPlace.getDescription();
-    }
-
     /**
     * check the inventory
     * @param item
@@ -75,6 +80,13 @@ public class Player extends Thing implements Contract{
     */
     public boolean checkInventory(String item){
         return this.inventory.contains(item);
+    }
+
+    public void getInventory() {
+        System.out.println("Inventory:");
+        for (String item : inventory) {
+            System.out.println("- " + item);
+        }
     }
 
     public void grab(String item) {

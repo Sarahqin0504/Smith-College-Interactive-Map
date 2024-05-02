@@ -17,6 +17,8 @@ public class Main {
 
             // Process user input
             switch (input) {
+                case "inverntory":
+                    player.getInventory();
                 case "grab":
                     System.out.print("Enter item to grab: ");
                     String itemToGrab = scanner.nextLine().trim().toLowerCase();
