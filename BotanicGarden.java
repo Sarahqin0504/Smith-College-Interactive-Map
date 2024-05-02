@@ -1,8 +1,13 @@
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
 public class BotanicGarden extends Place{
     private Map<String, Place> rooms;
+    private boolean isResting = false;
+    private String lastAction = "";
+    private int flowerSize = 1;
+    private String season = "";
     
     /**
      * Constructor for the BotanicGarden class.
@@ -12,6 +17,66 @@ public class BotanicGarden extends Place{
         initializeRooms();
         //System.out.println("Welcome to the Botanic Garden of Smith College!");
         //System.out.println("Explore our Lyman Plant House featuring various unique botanical rooms.");
+    }
+
+    /**
+     * Changes the season in the garden.
+     * Simulates the effect of seasons changing on the garden's flora and fauna.
+     */
+    public void changeSeason() {
+        String[] seasons = {"spring", "summer", "autumn", "winter"};
+        Random rand = new Random();
+        this.season = seasons[rand.nextInt(seasons.length)];
+        System.out.println("The season has changed to " + this.season + ".");
+        switch (this.season) {
+            case "spring":
+                System.out.println("Flowers start blooming beautifully.");
+                break;
+            case "summer":
+                System.out.println("The garden is having a hot party now!");
+                break;
+            case "autumn":
+                System.out.println("The garden starts to calm down.");
+                break;
+            case "winter":
+                System.out.println("The garden rests under a blanket of snow.");
+                break;
+        }
+        lastAction = "changeSeason";
+    }
+
+    /**
+     * The method is for visitors to observes insects flying around in the garden.
+     * @param x The x-coordinate of the flight path.
+     * @param y The y-coordinate of the flight path.
+     * @return true if the observation was successful, false otherwise (e.g., no insects in sight).
+     */
+    public boolean fly(int x, int y) {
+        System.out.println("You watch a insect fluttering at coordinates (" + x + ", " + y + ").");
+        lastAction = "fly";
+        return true; 
+    }
+
+    /**
+     * The method is to represent the shrinking of a flower or plant in the garden.
+     * @return The new size of the flower after shrinking.
+     */
+    public Number shrink() {
+        flowerSize = Math.max(0, flowerSize - 1); 
+        System.out.println("A flower in the garden has shrunk.");
+        lastAction = "shrink";
+        return flowerSize;
+    }
+
+    /**
+     * The method is to represent the growth of a flower or plant in the garden.
+     * @return The new size of the flower after growing.
+     */
+    public Number grow() {
+        flowerSize = Math.min(2, flowerSize + 1); // Ensure flowerSize doesn't exceed 2
+        System.out.println("A flower in the garden has grown.");
+        lastAction = "grow";
+        return flowerSize;
     }
 
     private void initializeRooms() {
@@ -106,6 +171,9 @@ public class BotanicGarden extends Place{
         }
     }
     
+    public Map<String, Place> getRooms() {
+        return rooms;
+    }
 
 }
 

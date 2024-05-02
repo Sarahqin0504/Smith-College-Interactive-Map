@@ -48,11 +48,17 @@ public class Main {
                     String itemToUse = scanner.nextLine().trim().toLowerCase();
                     player.use(itemToUse);
                     break;
-                case "walk":
-                    System.out.print("Enter direction to walk (north/south/east/west) (elevator available in Library): ");
-                    String direction = scanner.nextLine().trim().toLowerCase();
-                    player.walk(direction);
+                case "enter":
+                    Place currentPlace = player.getCurrentPlace();
+                    String building = currentPlace.getName();
+                    player.enter(building);
+                    System.out.println("You are currently in " + player.getCurrentPlace().getName());
                     break;
+                case "exit":
+                    Place exitPlace = player.getCurrentPlace();
+                    String exit = exitPlace.getName();
+                    player.enter(exit);
+                    System.out.println("You are currently in " + player.getCurrentPlace().getName());
                 case "quit":
                     System.out.println("Goodbye!");
                     scanner.close();
