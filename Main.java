@@ -10,12 +10,6 @@ public class Main {
         System.out.println("Welcome to Smith College!");
         System.out.println("You start in: " + player.getCurrentPlaceDescription()); // Should output library's description
 
-        // Movement commands to test
-        player.move("south"); // Moves to the bookstore
-        System.out.println("Now in: " + player.getCurrentPlaceDescription());
-        player.move("north"); // Moves back to the library
-        System.out.println("Now in: " + player.getCurrentPlaceDescription());
-        
         // Game loop
         while (true) {
             System.out.print("Enter your action: ");

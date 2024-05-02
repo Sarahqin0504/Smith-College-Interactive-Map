@@ -81,7 +81,7 @@ public class Bookstore extends Place {
         snacks.put("Potato Chips", 30);
         snacks.put("Chocolate", 50);
         snacks.put("Doritos", 30);
-        System.out.println("Entering the Bookstore...");
+        //System.out.println("Entering the Bookstore...");
     }
 
     public Boolean containsItem(String item){

@@ -11,9 +11,11 @@ public class GameSetup {
 
         // Set exits
         botanicGarden.setExit("east", library);
+        botanicGarden.setExit("south", bookstore);
         library.setExit("west", botanicGarden);
-        library.setExit("south", bookstore);
-        bookstore.setExit("north", library);
+        library.setExit("east", bookstore);
+        bookstore.setExit("west", library);
+        bookstore.setExit("north", botanicGarden);
     }
 
     public Place getStartingPlace() {
