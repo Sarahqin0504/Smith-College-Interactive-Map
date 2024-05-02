@@ -29,4 +29,7 @@ public class GameSetup {
     public BotanicGarden getBotanicGarden() {
         return this.botanicGarden;
     }
+    public Bookstore getBookstore() {
+        return this.bookstore;
+    }
 }
