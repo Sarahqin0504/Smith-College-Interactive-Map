@@ -3,9 +3,12 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
+        int num;
+        String ans;
         GameSetup setup = new GameSetup(); // This should create and configure all places
         Player player = new Player("player", "player", setup.getStartingPlace(), setup);
-        
+        Bookstore bookstore = new Bookstore();
+
         // Welcome message
         System.out.println("Welcome to Smith College!");
         System.out.println("You start in: " + player.getCurrentPlace().getName()); // Should output library's description
@@ -63,6 +66,20 @@ public class Main {
                     int floorNumber = scanner.nextInt();
                     player.elevator(floorNumber);
                     System.out.println("You are approaching " + player.getCurrentPlace().getName() + " and arrived");
+                    break;
+                case "buy":
+                    System.out.println("What would you like to buy?: ");
+                    ans = scanner.nextLine();
+                    System.out.println("How many would you like to buy?: ");
+                    num = scanner.nextInt();
+                    bookstore.buyItem(ans, num);
+                    break;
+                case "return":
+                    System.out.println("What would you like to return?: ");
+                    ans = scanner.nextLine();
+                    System.out.println("How many would you like to return?: ");
+                    num = scanner.nextInt();
+                    bookstore.returnItem(ans, num);
                     break;
                 case "quit":
                     System.out.println("Goodbye!");
