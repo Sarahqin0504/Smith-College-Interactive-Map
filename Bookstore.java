@@ -506,11 +506,11 @@ public class Bookstore extends Place {
                 System.out.println("You can't return more than you've bought!");
             }
     }
-        if(item.equals("Flash Drive")){
-            if(this.drives<300 && this.inventory.get("Flash Drive")>=number){
+        if(item.equals("Flash drive")){
+            if(this.drives<300 && this.inventory.get("Flash drive")>=number){
                 this.drives=this.drives+number;
                 this.money = this.money + 20*number;
-                this.inventory.remove("Flash Drive", number);
+                this.inventory.remove("Flash drive", number);
                 System.out.println("You've returned " + number + " flash drives successfully!");
             }else if(this.drives==300){
                 System.out.println("You haven't sold any to return!");
