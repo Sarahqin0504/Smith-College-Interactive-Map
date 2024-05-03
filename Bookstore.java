@@ -425,7 +425,7 @@ public class Bookstore extends Place {
         }
 
         if(item.equals("Blue hoodie")){
-            if(this.blueHoodies<150 && this.inventory.get("Blue Hoodie")>=number){
+            if(this.blueHoodies<150 && this.inventory.get("Blue hoodie")>=number){
                 this.blueHoodies=this.blueHoodies+number;
                 this.money = this.money + 50*number;
                 this.inventory.remove("Blue hoodie", number);
