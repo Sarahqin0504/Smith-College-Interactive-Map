@@ -5,6 +5,9 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         int num;
         String ans;
+        String size;
+        int cream;
+        int sugar;
         GameSetup setup = new GameSetup(); // This should create and configure all places
         Player player = new Player("player", "player", setup.getStartingPlace(), setup);
         Bookstore bookstore = new Bookstore();
@@ -73,6 +76,16 @@ public class Main {
                     System.out.println("How many would you like to buy?: ");
                     num = scanner.nextInt();
                     bookstore.buyItem(ans, num);
+                    break;
+                case "buy coffee":
+                    System.out.println("Welcome to Compass Cafe!");
+                    System.out.println("What size do you like? (small, medium, large)");
+                    size = scanner.nextLine();
+                    System.out.println("How much cream would you like? (enter numbers)");
+                    cream = scanner.nextInt();
+                    System.out.println("How much sugar would you like? (enter numbers)");
+                    sugar = scanner.nextInt();
+                    player.buyCoffee(size, cream, sugar);
                     break;
                 case "return":
                     System.out.println("What would you like to return?: ");

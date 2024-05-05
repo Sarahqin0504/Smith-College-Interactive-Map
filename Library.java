@@ -1,4 +1,5 @@
 import java.util.HashMap;
+import java.util.Hashtable;
 import java.util.Map;
 
 public class Library extends Place {
@@ -17,7 +18,7 @@ public class Library extends Place {
         floors.put("Second Floor", new SecondFloor());
         floors.put("Third Floor", new ThirdFloor());
         floors.put("Fourth Floor", new FourthFloor());
-        floors.put("Compass Cafe", new CompassCafe());
+        floors.put("Compass Cafe", new CompassCafe(10, 10, 10, 10));
         floors.put("Terrace", new Terrace());
         floors.put("Chapin Lawn", new ChapinLawn());
         floors.put("Burton Lawn", new BurtonLawn());
@@ -108,10 +109,50 @@ class FourthFloor extends Place {
 }
 
 class CompassCafe extends Place {
-    public CompassCafe() {
+    private int nCoffeeOunces; // The number of ounces of coffee remaining in inventory
+    private int nSugarPackets; // The number of sugar packets remaining in inventory
+    private int nCreams; // The number of "splashes" of cream remaining in inventory
+    private int nCups; // The number of cups remaining in inventory
+
+    public CompassCafe(int nCoffeeOunces, int nSugarPackets, int nCreams, int nCups) {
         super("Compass Cafe", "This is the Compass Cafe. You can purchase drinks here.");
-        // Add items or customize as needed
-    }
+        this.nCoffeeOunces = nCoffeeOunces;
+        this.nSugarPackets = nSugarPackets;
+        this.nCreams = nCreams;
+        this.nCups = nCups;
+        }
+        
+        /**
+         * selling coffee
+         * @param size size of coffee/ number of coffee in ouces
+         * @param nSugarPackets number of sugar packets
+         * @param nCreams number of creams
+         */
+        public void sellCoffee(int size, int nSugarPackets, int nCreams, int nCups){
+            if (size == 0 || nSugarPackets == 0 || nCreams == 0 || nCups == 0) {
+                restock(size, nSugarPackets, nCreams, nCups);
+            }
+            this.nCoffeeOunces -= size;
+            this.nSugarPackets -= nSugarPackets;
+            this.nCreams -= nCreams;
+            this.nCups -= nCups;
+            System.out.println("Coffee: " + nCoffeeOunces + "\nSugar: " + nSugarPackets + "\nCream: " + nCreams + "\nCups:" + nCups);
+        }
+
+        /**
+         * restocking
+         * @param nCoffeeOunces number of Coffee in ounces
+         * @param nSugarPackets number of Sugar Packets
+         * @param nCreams number of creams
+         * @param nCups number of cups
+         */
+        private void restock(int nCoffeeOunces, int nSugarPackets, int nCreams, int nCups){
+            this.nCoffeeOunces += nCoffeeOunces;
+            this.nSugarPackets += nSugarPackets;
+            this.nCreams += nCreams;
+            this.nCups += nCups;
+        }
+
 }
 
 class Terrace extends Place {

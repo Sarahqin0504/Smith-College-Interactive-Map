@@ -30,6 +30,10 @@ public class Player extends Thing implements Contract{
         return currentPlace.getList();
     }
 
+    public String getCurrentPlaceDescription() {
+        return currentPlace.getDescription();
+    }
+
     public void move(String direction) {
         Place nextPlace = currentPlace.getExit(direction);
         if (nextPlace != null) {
@@ -113,10 +117,6 @@ public class Player extends Thing implements Contract{
         }
     }
 
-    public String getCurrentPlaceDescription() {
-        return currentPlace.getDescription();
-    }
-
     /**
     * check the inventory
     * @param item
@@ -141,6 +141,24 @@ public class Player extends Thing implements Contract{
         return item;
     }
     
+    public void buyCoffee(String size, int sugar, int cream) {
+        CompassCafe compassCafe = (CompassCafe) setup.getLibrary().getFloors().get("Compass Cafe");
+        switch (size) {
+            case "small":
+                compassCafe.sellCoffee(2, sugar, cream, 1);
+                break;
+            case "medium":
+                compassCafe.sellCoffee(4, sugar, cream, 1);
+                break;
+            case "large":
+                compassCafe.sellCoffee(6, sugar, cream, 1);
+                break;
+            default:
+                System.out.println("Too much coffee is bad");
+                break;
+        }
+        this.inventory.add("Coffee");
+    }
 
     public void examine(String itemName) {
         // Get the list of items from the current place
