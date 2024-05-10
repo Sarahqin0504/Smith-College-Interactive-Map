@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class Player extends Thing implements Contract{
+public class Player extends Thing implements Cheatsheet{
 
     private Place currentPlace; // The current room the player is in
     private List<String> inventory; // The player's inventory
@@ -126,6 +126,10 @@ public class Player extends Thing implements Contract{
         return this.inventory.contains(item);
     }
 
+    public List<String> getInventory() {
+        return this.inventory;
+    }
+
     public void grab(String item) {
         this.inventory.add(item);
         System.out.println("You grabbed " + item + ".");
@@ -240,6 +244,8 @@ public class Player extends Thing implements Contract{
             System.out.println( item + "not found.");
         }
     }
+
+
 
     /**
      * The method is to allow the visitor (or their pet) to take a rest in the garden.

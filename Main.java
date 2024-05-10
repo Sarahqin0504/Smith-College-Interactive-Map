@@ -39,6 +39,9 @@ public class Main {
                     String itemToDrop = scanner.nextLine().trim().toLowerCase();
                     player.drop(itemToDrop);
                     break;
+                case "inventory":
+                    System.out.print(player.getInventory() + "\n");
+                    break;
                 case "examine":
                     System.out.print("Enter item to examine: ");
                     String itemToExamine = scanner.nextLine().trim().toLowerCase();
