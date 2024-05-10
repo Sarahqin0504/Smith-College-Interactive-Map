@@ -53,12 +53,12 @@ public class Player extends Thing implements Contract{
                 currentPlace = setup.getBotanicGarden().getRooms().get("Church Gallery");
                 System.out.println("You are now in Lyman Plant House.");
                 break;
-            default:
-                System.out.println("Invalid building.");
-                break;
             case "bookstore":
                 currentPlace = setup.getBookstore().getSections().get("Doorway");
                 System.out.println("You are now in the Bookstore.");
+                break;
+            default:
+                System.out.println("Invalid building.");
                 break;
         }
     }
@@ -163,7 +163,6 @@ public class Player extends Thing implements Contract{
     public void examine(String itemName) {
         // Get the list of items from the current place
         List<Thing> itemList = getCurrentPlaceItems();
-
         // Iterate over the list of items in the current place
         for (Thing item : itemList) {
             // Check if the item name matches the provided itemName
@@ -194,11 +193,48 @@ public class Player extends Thing implements Contract{
     }
 
     public void use(String item) {
-        if(item.equalsIgnoreCase("map")) {
-            System.out.println("You use the map to find your way.");
-        } else {
-        System.out.println("You used " + item + ".");
+        switch (item) {
+            case "map":
+                System.out.println("You use the map to find your way.");
+                break;
+            case "computer":
+                System.out.println("What would you like to search?");
+                String itemToSearch = scanner.nextLine().trim().toLowerCase();
+                useComputer(itemToSearch);
+                break;
+            case "large":
+
+                break;
+            default:
+                System.out.println("You used " + item + ".");
+                break;
         }
+    }
+
+    public void useComputer(String item) {
+        // list library
+        List<Thing> itemList = setup.getLibrary().getFloors().get("First Floor").getList();
+        itemList.addAll(setup.getLibrary().getFloors().get("Second Floor").getList());
+        itemList.addAll(setup.getLibrary().getFloors().get("Third Floor").getList());
+        itemList.addAll(setup.getLibrary().getFloors().get("Fourth Floor").getList());
+        itemList.addAll(setup.getLibrary().getFloors().get("Terrace").getList());
+        itemList.addAll(setup.getLibrary().getFloors().get("Compass Cafe").getList());
+        itemList.addAll(setup.getLibrary().getFloors().get("Chapin Lawn").getList());
+        itemList.addAll(setup.getLibrary().getFloors().get("Burton Lawn").getList());
+        itemList.addAll(setup.getLibrary().getFloors().get("Seelye Lawn").getList());
+        itemList.addAll(setup.getLibrary().getFloors().get("Alumni Gym").getList());
+        // list botanic garden
+        itemList.addAll(setup.getBotanicGarden().getList());
+        // list bookstore
+        itemList.addAll(setup.getBookstore().getList());
+        // get description 
+        for (Thing itemSearch : itemList) {
+             if (itemSearch.getName().equalsIgnoreCase(item)) {
+                // If a match is found, print its description
+                System.out.println(item + ": " + itemSearch.getDescription());
+                return; // Exit the method after printing the description
+                }
+            }
     }
 
     /**
