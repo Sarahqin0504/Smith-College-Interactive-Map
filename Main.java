@@ -14,7 +14,8 @@ public class Main {
 
         // Welcome message
         System.out.println("Welcome to Smith College!");
-        System.out.println("You start in: " + player.getCurrentPlace().getName()); // Should output library's description
+        System.out.println("Founded in 1871, Smith College opened in 1875 with 14 students. Today, Smith is among the largest women’s colleges in the United States, with students from 46 states and 78 countries. An independent, nondenominational college, Smith remains strongly committed to the education of women at the undergraduate level");
+        System.out.println("You first stop is: " + player.getCurrentPlace().getName()); // Should output library's description
 
         // Game loop
         while (true) {
