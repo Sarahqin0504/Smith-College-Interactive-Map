@@ -1,6 +1,12 @@
 import java.util.Scanner;
 
+/* main game loop */
 public class Main {
+
+    /**
+     * constructor
+     * @param args Command-line arguments
+     */
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         int num;
@@ -8,12 +14,13 @@ public class Main {
         String size;
         int cream;
         int sugar;
-        GameSetup setup = new GameSetup(); // This should create and configure all places
+        GameSetup setup = new GameSetup(); 
         Player player = new Player("player", "player", setup.getStartingPlace(), setup);
         Bookstore bookstore = new Bookstore();
 
         // Welcome message
         System.out.println("Welcome to Smith College!");
+        // copied from smith college website 
         System.out.println("Founded in 1871, Smith College opened in 1875 with 14 students. Today, Smith is among the largest women’s colleges in the United States, with students from 46 states and 78 countries. An independent, nondenominational college, Smith remains strongly committed to the education of women at the undergraduate level");
         System.out.println("You first stop is: " + player.getCurrentPlace().getName()); // Should output library's description
 
