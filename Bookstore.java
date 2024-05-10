@@ -1,9 +1,9 @@
 import java.util.Hashtable;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 public class Bookstore extends Place {
+/* Attributes for bookstore */
     private int tshirts;
     private int grayHoodies;
     private int blueHoodies;
@@ -20,16 +20,16 @@ public class Bookstore extends Place {
     private Map<String, Place> sections; 
 
     
-
+/* Represents Smith College Bookstore */
     public Bookstore(){
         super("Bookstore", "The Smith College Bookstore.");
 
-        // Initialize map
+        // Initializes map
         this.sections = new HashMap<>();
         this.textbooks = new Hashtable<String, Integer[]>();
         this.inventory = new Hashtable<String, Integer>();
 
-        // Add sections to the store
+        // Adds merchandise in hashtable sections to the store
         sections.put("Clothing", new ClothingSection());
         sections.put("Books", new BookSection());
         sections.put("Electronics", new TechSection());
@@ -38,7 +38,7 @@ public class Bookstore extends Place {
 
 
         // Sections of bookstore - each section has an exit of the previous section as one moves farther back into the store
-
+        // Sets exists for each section
 
         ClothingSection clothing = (ClothingSection) sections.get("Clothing");
         clothing.setExit("south", sections.get("Doorway"));
@@ -61,7 +61,7 @@ public class Bookstore extends Place {
         
 
 
-    // Inventory stock numbers
+   /*Stock numbers for store items */
         this.tshirts = 400;
         this.grayHoodies = 100;
         this.blueHoodies = 150;
@@ -74,7 +74,7 @@ public class Bookstore extends Place {
         this.drives = 300;
         this.money = 100;
     
-   
+   /*Stock numbers and prices for texbook hashtable */
         Integer calcArray[]={50,60};
         Integer spanishArray[]={20,40};
         Integer quantumArray[]={15,70};
@@ -88,7 +88,7 @@ public class Bookstore extends Place {
 
    
     }
-
+/*Clothing section */
     class ClothingSection extends Place {
         public ClothingSection() {
             super("Clothing", "Welcome to the clothing section. We have t-shirts, blue hoodies, and gray hoodies in stock.");
@@ -97,6 +97,8 @@ public class Bookstore extends Place {
             addItem(new Thing("Gray Hoodie", "A gray Smith College hoodie."));
         }
     }
+
+/*Electronics section */
     class TechSection extends Place {
         public TechSection() {
             super("Electronics", "Welcome to the electronics section. See our selection of available tech items.");
@@ -105,6 +107,8 @@ public class Bookstore extends Place {
             addItem(new Thing("Flash Drive", "A 100 GB flash drive with USB connection."));
         }
     }
+
+/*Book section */
     class BookSection extends Place {
         public BookSection() {
             super("Books", "Welcome to the textbook section. Find the textbook suitable to your coursework here.");
@@ -115,6 +119,8 @@ public class Bookstore extends Place {
             addItem(new Thing("Foundational Astronomy", "A beginners guide to the marvels of our galaxy and beyond."));
         }
     }
+
+/*Office section */
     class OfficeSection extends Place {
         public OfficeSection() {
             super("Office Supplies", "Welcome to the office supplies section. Advance your productivity with materials to suit your needs.");
@@ -124,6 +130,8 @@ public class Bookstore extends Place {
             addItem(new Thing("Pencils", "Mechanical graphite pencils in packs of 3."));
         }
     }
+
+/*Doorway area */
     class Doorway extends Place {
         public Doorway() {
             super("Doorway", "The place to enter and exit the bookstore.");
@@ -133,32 +141,35 @@ public class Bookstore extends Place {
     }
 
 
-
+ /**
+     * Retrieves the bookstore's sections
+     * @return The map of bookstore sections
+     */
     public Map<String, Place> getSections() {
         return sections;
     }
 
-
-
-
-
-
+/**
+         * Checks if textbook is in store
+         * @param item name of book
+         */
     public Boolean containsItemText(String item){
         return this.textbooks.get(item)[0]>0;
         }
 
-    
+/**
+         * Checks if an item is in store
+         * @param item name of item
+         */
     public Boolean checkInventory(String item){
         return this.inventory.get(item)>0;
     }
-  
 
-    // Shows item menu
-    public void printSelection(){
-        System.out.println("Welcome to the bookstore! Feel free to browse our wares:" + "\n  1. Clothing \n  2. Textbooks \n  3. Electronics \n  4. Office Supplies \n  5. Snacks");
-    }
-
-  
+/**
+         * Checks if player can afford items
+         * @param item name of item
+         * @param number of items
+         */
 
     public Boolean checkBalanceText(String item, int number){
         if(this.money>=this.textbooks.get(item)[1]*number){
@@ -170,7 +181,11 @@ public class Bookstore extends Place {
 
     }
 
-
+/**
+         * Checks if entered number of books are in the store
+         * @param item name of book
+         * @param number of books
+         */
     public Boolean checkValidValueText(String item, int number){
         if(this.textbooks.get(item)[0]>=number){
             return true;
@@ -178,6 +193,12 @@ public class Bookstore extends Place {
             return false;
         }
     }
+
+    /**
+         * Updates stock when book is purchased
+         * @param item name of book
+         * @param number number of books purchased
+         */
   
     public void runPurchaseText(String item, int number){
        this.money=this.money-this.textbooks.get(item)[1]*number;
@@ -185,8 +206,11 @@ public class Bookstore extends Place {
     }
    
 
-
-
+/**
+         * Allows player to buy an item in the store provided their funds are sufficient, doesn't allow purchase if not
+         * @param item name of item/book
+         * @param number of items to purchase
+         */
     public void buyItem(String item, int number){
         if(item.equals("Gray hoodie")){
             if(this.money>=50*number){
@@ -194,15 +218,16 @@ public class Bookstore extends Place {
                 this.money = this.money - 50*number;
                 this.inventory.put("Gray hoodie", number);
                 System.out.println("Purchased " + number+ " gray hoodies " + "successfully!");
-
+            
+                // Checks funds are sufficient
             }else if(this.money<50*number){
                 System.out.println("Insufficient funds.");
             }
-
+                // Checks if stock allows for purchase
             if (number>100){
                 System.out.println("That's more than we have in stock!");
             }
-
+                // Checks if items are in stock in the store 
             if (this.grayHoodies<1){
                 System.out.println("Sorry, we're out of stock!");
             }
@@ -211,81 +236,81 @@ public class Bookstore extends Place {
 
            if(item.equals("Blue hoodie")) {
                 if(this.money>=50*number){
-                this.blueHoodies = this.blueHoodies - number;
-                this.money = this.money - 50*number;
-                this.inventory.put("Blue hoodie", number);
-                System.out.println("Purchased" + number+ " blue hoodies " + "successfully!");
+                    this.blueHoodies = this.blueHoodies - number;
+                    this.money = this.money - 50*number;
+                    this.inventory.put("Blue hoodie", number);
+                    System.out.println("Purchased" + number+ " blue hoodies " + "successfully!");
                 
-                }else if(this.money<50*number){
-                    System.out.println("Insufficient funds.");
+                    }else if(this.money<50*number){
+                        System.out.println("Insufficient funds.");
         
                 }
-                if (number>150){
-                    System.out.println("That's more than we have in stock!");
+                    if (number>150){
+                        System.out.println("That's more than we have in stock!");
                 }
         
-                if (this.blueHoodies<1){
-                    System.out.println("Sorry, we're out of stock!");
+                    if (this.blueHoodies<1){
+                        System.out.println("Sorry, we're out of stock!");
                 }
                 
             }
         
       
            if(item.equals("T-shirt")){
-            if(this.money>=30*number){
-                this.tshirts = this.tshirts - number;
-                this.money = this.money - 30*number;
-                this.inventory.put("T-shirt", number);
-                System.out.println("Purchased " + number+" t-shirts " + "successfully!");
+                if(this.money>=30*number){
+                    this.tshirts = this.tshirts - number;
+                    this.money = this.money - 30*number;
+                    this.inventory.put("T-shirt", number);
+                    System.out.println("Purchased " + number+" t-shirts " + "successfully!");
         
-                }else if(this.money<30*number){
-                    System.out.println("Insufficient funds.");
+                    }else if(this.money<30*number){
+                        System.out.println("Insufficient funds.");
                 }
-                if (number>400){
-                    System.out.println("That's more than we have in stock!");
+                    if (number>400){
+                        System.out.println("That's more than we have in stock!");
                 }
         
-                if (this.tshirts<1){
-                    System.out.println("Sorry, we're out of stock!");
+                    if (this.tshirts<1){
+                        System.out.println("Sorry, we're out of stock!");
                 }
                 
             }
        
-           if(item.equals("Plain paper")){
-            if(this.money>=10*number){
-            this.plainPaper = this.plainPaper - number;
-            this.money = this.money - 10*number;
-            this.inventory.put("Plain paper", number);
-            System.out.println("Purchased " + number+"plain paper units " + "successfully!");
+            if(item.equals("Plain paper")){
+                if(this.money>=10*number){
+                    this.plainPaper = this.plainPaper - number;
+                    this.money = this.money - 10*number;
+                    this.inventory.put("Plain paper", number);
+                    System.out.println("Purchased " + number+"plain paper units " + "successfully!");
             
-            }else if(this.money<10*number){
-                System.out.println("Insufficient funds.");
+                    }else if(this.money<10*number){
+                        System.out.println("Insufficient funds.");
             }
-            if (number>700){
-                System.out.println("That's more than we have in stock!");
+                if (number>700){
+                    System.out.println("That's more than we have in stock!");
             }
     
-            if (this.plainPaper<1){
-                System.out.println("Sorry, we're out of stock!");
+                if (this.plainPaper<1){
+                    System.out.println("Sorry, we're out of stock!");
             }
         } 
        
            if(item.equals("Lined paper")){
-            if(this.money>=8*number){
-            this.linedPaper = this.linedPaper - number;
-            this.money = this.money - 8*number;
-            this.inventory.put("Lined paper", number);
-            System.out.println("Purchased "+number+"lined paper units " + "successfully!");
+                if(this.money>=8*number){
+                    this.linedPaper = this.linedPaper - number;
+                    this.money = this.money - 8*number;
+                    this.inventory.put("Lined paper", number);
+                    System.out.println("Purchased "+number+"lined paper units " + "successfully!");
             
-            }else if(this.money<8*number){
-                System.out.println("Insufficient funds.");
+                }else if(this.money<8*number){
+                    System.out.println("Insufficient funds.");
             }
-            if (number>800){
-                System.out.println("That's more than we have in stock!");
+                if (number>800){
+                    System.out.println("That's more than we have in stock!");
             }
     
-            if (this.linedPaper<1){
-                System.out.println("Sorry, we're out of stock!");
+                if (this.linedPaper<1){
+                    System.out.println("Sorry, we're out of stock!");
             }
         } 
     
@@ -385,6 +410,7 @@ public class Bookstore extends Place {
                     
                 }
         
+                // Checks that textbook exists in store, that purchased number is in stock and that balance can cover purchase
                 if(item.equals("Textbook")){
                     if(containsItemText(item)){
                         if(checkValidValueText(item, number)&&checkBalanceText(item, number)){
@@ -408,12 +434,19 @@ public class Bookstore extends Place {
         
     
 
-// return methods for each product type
+/**
+         * Allows player to return an item in the store provided their funds are sufficient, doesn't allow purchase if not. Books and paper are non-returnable
+         * @param item name of item
+         * @param number of items to return
+         */
     public void returnItem(String item,int number){
         if(item.equals("T-shirt")){
+            // Checks that items have been purchased and that player has item in inventory
             if(this.tshirts<400 && this.inventory.get("T-shirt")>=number){
                 this.tshirts=this.tshirts+number;
+            // Refunds price to player balance
                 this.money = this.money + 30*number;
+            // Removes item from player inventory
                 this.inventory.remove("T-shirt", number);
                 System.out.println("You've returned " + number + " shirt(s) successfully!");
             }else if(this.tshirts==400){
