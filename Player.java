@@ -1,5 +1,6 @@
 import java.util.*;
 
+/* Represents a Player in the game. */
 public class Player extends Thing implements Cheatsheet{
 
     private Place currentPlace; // The current room the player is in
@@ -9,6 +10,13 @@ public class Player extends Thing implements Cheatsheet{
     Scanner scanner = new Scanner(System.in);
     GameSetup setup = new GameSetup();
 
+     /**
+     * Constructor for Player class.
+     * @param name The name of the player.
+     * @param description The description of the player.
+     * @param startingPlace The starting place of the player.
+     * @param setup The game setup object.
+     */
     public Player (String name, String description, Place startingPlace, GameSetup setup) {
         super(name, description);
         this.inventory = new ArrayList<>();
@@ -17,33 +25,76 @@ public class Player extends Thing implements Cheatsheet{
         this.setup = setup;
     }
 
+    /**
+     * Getter for the current place.
+     * @return The current place of the player.
+     */
     public Place getCurrentPlace() {
         return currentPlace;
     }
 
+    /**
+     * Setter for the current place.
+     * @param currentPlace The current place to set.
+     */
     public void setCurrentPlace (Place currentPlace) {
         this.currentPlace = currentPlace;
     }
 
+    /**
+     * get the list of items from the current place.
+     * @return List of items in the current place.
+     */
     // Method to get the list of items from the current place
     public List<Thing> getCurrentPlaceItems() {
         return currentPlace.getList();
     }
 
+    /**
+     * Retrieves the description of the current place.
+     * @return Description of the current place.
+     */
     public String getCurrentPlaceDescription() {
         return currentPlace.getDescription();
     }
 
+    /**
+     * Moves the player in the specified direction.
+     * @param direction The direction in which to move.
+     */
+    @Override
     public void move(String direction) {
-        Place nextPlace = currentPlace.getExit(direction);
-        if (nextPlace != null) {
-            currentPlace = nextPlace;
-            System.out.println("You move to: " + currentPlace.getDescription());
+        // Check if the player has a one card
+        boolean hasOneCard = checkInventory("one card");
+
+        // Check if the direction is valid and the player has a one card
+        if (hasOneCard && direction.equalsIgnoreCase("west") && currentPlace == setup.getLibrary().getFloors().get("Fourth Floor")) {
+            Place nextPlace = currentPlace.getExit(direction);
+            if (nextPlace != null) {
+                currentPlace = nextPlace;
+                System.out.println("You move to: " + currentPlace.getName());
+            } else {
+                System.out.println("You can't go that way.");
+            }
+        } else if (!hasOneCard && direction.equalsIgnoreCase("west") && currentPlace == setup.getLibrary().getFloors().get("Fourth Floor")) {
+            System.out.println("You need a one card to access the terrace from this floor.");
         } else {
-            System.out.println("You can't go that way.");
+            // Handle other directions as before
+            Place nextPlace = currentPlace.getExit(direction);
+            if (nextPlace != null) {
+                currentPlace = nextPlace;
+                System.out.println("You move to: " + currentPlace.getName());
+            } else {
+                System.out.println("You can't go that way.");
+            }
         }
     }
 
+    /**
+     * Enters the specified building.
+     * @param building The building to enter.
+     */
+    @Override
     public void enter(String building) {
         switch (building.toLowerCase()) {
             case "library":
@@ -63,6 +114,11 @@ public class Player extends Thing implements Cheatsheet{
         }
     }
 
+    /**
+     * Exits the specified building.
+     * @param building The building to exit.
+     */
+    @Override
     public void exit(String building) {
         switch (building) {
             case "First Floor":
@@ -80,13 +136,18 @@ public class Player extends Thing implements Cheatsheet{
         }
     }
 
+    /**
+     * Moves the player to the specified floor with the elevator.
+     * @param floorNumber The floor number to move to.
+     */
+    @Override
     public void elevator(int floorNumber) {
         if (currentPlace == setup.getLibrary().getFloors().get("Ground Floor")||
             currentPlace == setup.getLibrary().getFloors().get("First Floor") || 
             currentPlace == setup.getLibrary().getFloors().get("Second Floor")||
             currentPlace == setup.getLibrary().getFloors().get("Third Floor") ||
             currentPlace == setup.getLibrary().getFloors().get("Fourth Floor")){
-                // Use switch statement to handle different floor numbers
+            // Use switch statement to handle different floor numbers
             switch (floorNumber) {
                 case 0:
                     // I should use setCurrentPlace(), but I forgot about it
@@ -126,25 +187,52 @@ public class Player extends Thing implements Cheatsheet{
         return this.inventory.contains(item);
     }
 
+    /**
+     * Retrieves the inventory of the player.
+     * @return The inventory of the player.
+     */
     public List<String> getInventory() {
         return this.inventory;
     }
 
+    /**
+     * Adds the specified item to the player's inventory.
+     * @param item The item to add to the inventory.
+     */
+    @Override
     public void grab(String item) {
         this.inventory.add(item);
         System.out.println("You grabbed " + item + ".");
     }
 
+    /**
+     * Removes the specified item from the player's inventory.
+     * @param item The item to remove from the inventory.
+     * @return The item that was removed.
+     */
+    @Override
     public String drop(String item) {
         System.out.println("You dropped " + item + ".");
         return item;
     }
 
+    /**
+     * Buys the specified item.
+     * @param item The item to buy.
+     * @return The item that was bought.
+     */
+    @Override
     public String buy(String item) {
         System.out.println("You bought " + item + ".");
         return item;
     }
     
+    /**
+     * Buys a coffee with the specified size, sugar, and cream.
+     * @param size The size of the coffee.
+     * @param sugar The amount of sugar.
+     * @param cream The amount of cream.
+     */
     public void buyCoffee(String size, int sugar, int cream) {
         CompassCafe compassCafe = (CompassCafe) setup.getLibrary().getFloors().get("Compass Cafe");
         switch (size) {
@@ -164,6 +252,11 @@ public class Player extends Thing implements Cheatsheet{
         this.inventory.add("Coffee");
     }
 
+    /**
+     * Examines the specified item.
+     * @param itemName The name of the item to examine.
+     */
+    @Override
     public void examine(String itemName) {
         // Get the list of items from the current place
         List<Thing> itemList = getCurrentPlaceItems();
@@ -180,6 +273,12 @@ public class Player extends Thing implements Cheatsheet{
         System.out.println("The " + itemName + " cannot be found.");
     }
 
+    /**
+     * Provides a description of the current place including its items.
+     * @param currentPlace The current place to describe.
+     * @return Description of the current place including its items.
+     */
+    @Override
     public String lookAround(Place currentPlace) {
         // Get the list of items from the current place
         List<Thing> itemList = currentPlace.getList();
@@ -196,6 +295,11 @@ public class Player extends Thing implements Cheatsheet{
         return "\n" + currentPlace.getDescription() + "\n" + description.toString();
     }
 
+    /**
+     * Uses the specified item
+     * @param item The item to use.
+     */
+    @Override
     public void use(String item) {
         switch (item) {
             case "map":
@@ -215,6 +319,10 @@ public class Player extends Thing implements Cheatsheet{
         }
     }
 
+    /**
+     * Uses the computer to search for the specified item.
+     * @param item The item to search for.
+     */
     public void useComputer(String item) {
         // list library
         List<Thing> itemList = setup.getLibrary().getFloors().get("First Floor").getList();

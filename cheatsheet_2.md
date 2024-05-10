@@ -10,7 +10,7 @@
                    
 "look around": get description of the room and the items in the room
                    
-"use": use things; you can only use computer to search things
+"use": use things; you can only use computer to search things in library
                     
 "enter": allows to enter the building into a specific room or place
                     

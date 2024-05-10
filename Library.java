@@ -1,10 +1,14 @@
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Represents Neilson Library
+ */
 public class Library extends Place {
 
     private Map<String, Place> floors; 
 
+    /* constructor */
     public Library() {
         super("Library", "Neilson library");
 
@@ -57,12 +61,18 @@ public class Library extends Place {
 
     }
 
+    /**
+     * Retrieves the floors of the library.
+     * @return The map of floors in the library.
+     */
     public Map<String, Place> getFloors() {
         return floors;
     }
 }
 
+/* ground floor */
 class GroundFloor extends Place {
+    /* constructor */
     public GroundFloor() {
         super("Ground Floor", "This is the Ground Floor. At the Front desk, you can borrow or return books. There is an exit to the south and west.");
         // Add items to the ground floor inventory
@@ -73,46 +83,57 @@ class GroundFloor extends Place {
     }
 }
 
+/* first floor */
 class FirstFloor extends Place {
+    /* constructor */
     public FirstFloor() {
         super("First Floor", "This is the First Floor. There is a Front desk and the Compass Cafe. Exit to the north and east.");
-        // Add items or customize as needed
+        // Add items to the first floor inventory
         addItem(new Thing("Front Desk", "You can ask questions here"));
         addItem(new Thing("Table", "An interesting looking table"));
         addItem(new Thing("One card", "Lost Onecard"));
     }
 }
 
+/* second floor */
 class SecondFloor extends Place {
+    /* constructor */
     public SecondFloor() {
         super("Second Floor", "This is the Second Floor. Study Space to the north.");
-        // Add items or customize as needed
+        // Add items to the second floor inventory
         addItem(new Thing("Computer", "Hello world"));
     }
 }
 
+/* third floor */
 class ThirdFloor extends Place {
+    /* constructor */
     public ThirdFloor() {
         super("Third Floor", "This is the Third Floor. Study Space to the north.");
-        // Add items or customize as needed
+        // Add items to the third floor inventory
         addItem(new Thing("Desk", "Just a desk"));
         addItem(new Thing("Chair", "You can rest here"));
     }
 }
 
+/* fourth floor */
 class FourthFloor extends Place {
+    /* constructor */
     public FourthFloor() {
         super("Fourth Floor", "This is the Skyline reading room. Terrace to the west.");
-        // Add items or customize as needed
+        // Add items to the fourth floor inventory
+        addItem(new Thing("One card", "lost one card"));
     }
 }
 
+/* compass cafe */
 class CompassCafe extends Place {
     private int nCoffeeOunces; // The number of ounces of coffee remaining in inventory
     private int nSugarPackets; // The number of sugar packets remaining in inventory
     private int nCreams; // The number of "splashes" of cream remaining in inventory
     private int nCups; // The number of cups remaining in inventory
 
+    /* Constructor */
     public CompassCafe(int nCoffeeOunces, int nSugarPackets, int nCreams, int nCups) {
         super("Compass Cafe", "This is the Compass Cafe. You can purchase drinks here.");
         this.nCoffeeOunces = nCoffeeOunces;
@@ -154,35 +175,49 @@ class CompassCafe extends Place {
 
 }
 
+/* terrace */
 class Terrace extends Place {
+    /* constructor */
     public Terrace() {
         super("Terrace", "This is the Terrace. Please enjoy the beautiful view.");
-        // Add items or customize as needed
+        // Add items to the terrace inventory
         addItem(new Thing("Lounge Chair", "You can rest here"));
     }
 }
 
+/* chapin lawn */
 class ChapinLawn extends Place {
+    /* constructor */
     public ChapinLawn() {
         super("Chapin Lawn", "This is Chapin Lawn, where students all have fun and relax.");
-        // Add items or customize as needed
+        // Add items to the chapin lawn inventory
+        addItem(new Thing("croissant, egg and cheese", "lost breakfast"));
     }
 }
 
+/* burton lawn */
 class BurtonLawn extends Place {
+    /* constructor */
     public BurtonLawn() {
         super("Burton Lawn", "This is Burton lawn, leading to the academic buildings.");
-        // Add items or customize as needed
+        // Add items to the burton lawn inventory
+        addItem(new Thing("calculator", "some lost calculator"));
     }
 }
 
+/* seelye lawn */
 class SeelyeLawn extends Place {
+    /* constructor */
     public SeelyeLawn() {
         super("Seelye Lawn", "This is Seelye Lawn. There are a lot of squirrels");
+        // Add items to the seelye lawn inventory
+        addItem(new Thing("Squirrel", "lovely squireel around the campus"));
     }
 }
 
+/* alumni gym */
 class AlumniGym extends Place {
+    /* constructor */
     public AlumniGym() {
         super("Alumni Gym", "This is the Alumni Gym, where you actually study");
     }
