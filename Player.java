@@ -228,13 +228,17 @@ public class Player extends Thing implements Contract{
         // list bookstore
         itemList.addAll(setup.getBookstore().getList());
         // get description 
-        for (Thing itemSearch : itemList) {
-             if (itemSearch.getName().equalsIgnoreCase(item)) {
-                // If a match is found, print its description
-                System.out.println(item + ": " + itemSearch.getDescription());
-                return; // Exit the method after printing the description
-                }
-            }
+        try{ 
+            for (Thing itemSearch : itemList) {
+                    if (itemSearch.getName().equalsIgnoreCase(item)) {
+                        // If a match is found, print its description
+                        System.out.println(item + ": " + itemSearch.getDescription());
+                        return; // Exit the method after printing the description
+                        }
+                    }
+        }catch (RuntimeException e) {
+            System.out.println( item + "not found.");
+        }
     }
 
     /**
