@@ -56,6 +56,31 @@ Our team fostered a highly collaborative environment. At first, we concentrated 
 
 
 
+Marlena's reflection: 
+
+What was your overall approach to tackling this project? 
+Each group member was tasked with creating a building, and collectively worked on the overall setup of the game along with the main and player classes. Our work started out in a more individual format, but upon assembling the components became more collaborative.
+
+What new thing(s) did you learn / figure out in completing this project? 
+I learned about using a hashmap, as well as creating more complex conditionals within a class. My knowledge relating to the capabilites of a hashtable were expanded during this assignment. 
+
+Is there anything that you wish you had implemented differently? 
+Before creating the bookstore, I feel that I should have planned out all of the components I wanted to use so that I structured them most efficiently. In this case, I ended up having to go back and rework several parts as they were not set up in a way that made sense with other methods in the game context. 
+
+If you had unlimited time, what additional features would you implement? 
+I would be interested in adding a book rental service to the bookstore and interactions with a cashier, as these are major components of the real Smith College store that would make the game more engaging overall. 
+
+What was the most helpful piece of feedback you received while working on your project? Who gave it to you? 
+I consulted with a TA about formatting the methods in the bookstore class so that they would work properly in the main. They provided me with feedback about my work at that point and made several suggestions for improvement, one being that I use single, overrarching buy and return methods for all items rather than item specific ones, which consolidated my code nicely. 
+
+If you could go back in time and give your past self some advice about this project, what hints would you give? 
+I would give the hint about working on the most complex parts as soon as possible, as it may have saved me from frantically trying to fix and add elements close to the deadline. 
+
+If you worked with a team: please comment on how your team dynamics influenced your experience working on this project.
+Our team environment was positive overall, and we were able to arrange in-person meetings several times but largely communicated virtually. I felt that my teammates were accepting of my ideas and openly provided feedback/suggestions pertaining to my work. 
+
+
+
 
 
 
